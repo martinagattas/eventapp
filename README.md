@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Este es el proyecto final integrador de la especialización en Frontend del curso Certified Tech Developer.
 
-## Getting Started
+## IMPORTANTE
 
-First, run the development server:
+- Manejo de nombres de archivos, carpetas, funciones, etc. EN INGLÉS
+- Armar siempre ramas para trabajar sobre una issue: "nombre-de-la-issue"
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Comandos para levantar el proyecto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1 - npm install
+2 -npm run dev
+3 - Abrir el link http://localhost:3000/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura del proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Carpeta components
 
-## Learn More
+Aquí van todos los componentes del proyecto. Armaremos, además, carpetas internas para cada sección de la aplicación (ej. Carpeta "Home" contiene los componentes "Navbar" y "Footer")
 
-To learn more about Next.js, take a look at the following resources:
+#### Carpeta pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Aquí van todas las páginas del proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Carpeta public
 
-## Deploy on Vercel
+Aquí van todas las imágenes del proyecto. Incluido el favicon
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Carpeta services
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Aquí van todas las llamadas a las api externas
+
+#### Carpeta styles
+
+Aquí van todos los archivos .module.css
+
+Trabajaremos todo con Material UI. La librería ya está instalada en el proyecto, tanto componentes como íconos:
+
+- npm install @mui/material @emotion/react @emotion/styled
+- npm install @mui/icons-material
+
+#### Carpeta test
+
+Aquí van todos los tests. Aún no hay librerías instaladas, pero utilizaremos Jest y Cypress.
+
+#### Carpeta types
+
+Aquí van todos types a los que deben hacer referencia los componentes de la aplicación.

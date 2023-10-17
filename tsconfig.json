@@ -18,8 +18,23 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "eventapp/components/*": [
+        "components/*"
+      ],
+      "eventapp/services/*": [
+        "services/*"
+      ],
+      "eventapp/pages/*": [
+        "pages/*"
+      ],
+      "eventapp/styles/*": [
+        "styles/*"
+      ],
+      "eventapp/test/*": [
+        "test/*"
+      ]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
