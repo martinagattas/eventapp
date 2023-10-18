@@ -7,9 +7,28 @@ Este es el proyecto final integrador de la especialización en Frontend del curs
 
 ## Comandos para levantar el proyecto
 
-1 - npm install
-2 -npm run dev
-3 - Abrir el link http://localhost:3000/
+1. npm install
+2. npm run dev
+3. Abrir el link http://localhost:3000/
+
+## Comandos para crear una rama
+
+1. Me paro en "main"
+2. Hago pull de "main"
+
+```git pull origin main```
+
+3. Si tengo que crear una rama:
+
+```git checkout -b nombre-de-la-issue```
+
+4. Para hacer commits, me voy al ícono de ramas y voy commiteando todos los archivos que yo quiera
+
+5. Para hacer push:
+
+- Primero, me aseguro que estoy actualizada con "main": ```git pull origin main```
+- Si hay cambios y no hay conflictos, pongo en la consola ":x" y le doy "enter"
+- Ejecuto: ```git push origin nombre-de-la-issue```
 
 ## Estructura del proyecto
 
