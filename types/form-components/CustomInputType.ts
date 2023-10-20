@@ -1,6 +1,6 @@
 import { Control } from 'react-hook-form';
 
-export interface CustomInputType {
+export type CustomInputType = {
     name: string,
     label: string,
     type: string,
