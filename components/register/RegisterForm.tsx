@@ -1,8 +1,7 @@
-import { Box, Container, Button } from "@mui/material"
+import { Box, Container, Button, Grid } from "@mui/material"
 import { FC } from "react"
 import { CustomInput } from "../form-components/CustomInput"
 import { useForm, SubmitHandler } from "react-hook-form"
-import styles from "../../styles/global.module.scss"
 import { createUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 
@@ -39,9 +38,9 @@ export const RegisterForm: FC = () => {
     };
 
     return(
-        <Container>
-            <Box>
-                <form onSubmit={handleSubmit(onSubmit)} className={`${styles.dFlexColumn} ${styles.gap}`}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
                     <CustomInput
                         type="text"
                         name="name"
@@ -51,6 +50,8 @@ export const RegisterForm: FC = () => {
                         placeholder="Ej: María"
                         required={true}
                     />
+                </Grid>
+                <Grid item xs={12}>
                     <CustomInput
                         type="text"
                         name="surname"
@@ -60,6 +61,8 @@ export const RegisterForm: FC = () => {
                         placeholder="Ej: Pérez"
                         required={true}
                     />
+                </Grid>
+                <Grid item xs={12}>
                     <CustomInput
                         type="email"
                         name="email"
@@ -69,6 +72,8 @@ export const RegisterForm: FC = () => {
                         placeholder="Ej: maria@perez.com"
                         required={true}
                     />
+                </Grid>
+                <Grid item xs={12}>
                     <CustomInput
                         type="password"
                         name="password"
@@ -78,6 +83,8 @@ export const RegisterForm: FC = () => {
                         placeholder="······"
                         required={true}
                     />
+                </Grid>
+                <Grid item xs={12}>
                     <CustomInput
                         type="password"
                         name="confirmPassword"
@@ -87,9 +94,11 @@ export const RegisterForm: FC = () => {
                         placeholder="······"
                         required={true}
                     />
-                    <Button type="submit" variant="contained" color="primary">Registrarme</Button>
-                </form>
-            </Box>
-        </Container>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button type="submit" variant="contained" className="button primaryButton">Registrarme</Button>
+                </Grid>
+            </Grid>
+        </form>
     )
 }
