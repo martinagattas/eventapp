@@ -3,7 +3,7 @@ import { NextPage } from "next";
 
 const Register: NextPage = () => {
     return (
-        <RegisterForm data={{}}/>
+        <RegisterForm/>
     )
 }
 
