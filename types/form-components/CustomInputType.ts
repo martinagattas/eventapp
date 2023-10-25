@@ -9,6 +9,6 @@ export type CustomInputType = {
     placeholder?: string,
     defaultValue?: string,
     error?: boolean,
-    errorMessage?: string,
+    helperText?: string,
     textFieldProps?: Record<string, any>
 }

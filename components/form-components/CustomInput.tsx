@@ -11,7 +11,7 @@ export const CustomInput = ({
     placeholder,
     defaultValue,
     error,
-    errorMessage,
+    helperText,
     textFieldProps
 }: CustomInputType) => {
     return(
@@ -29,7 +29,7 @@ export const CustomInput = ({
                     required={required}
                     placeholder={placeholder}
                     error={error}
-                    helperText={errorMessage}
+                    helperText={helperText}
                     {...textFieldProps}
                 />
             )}

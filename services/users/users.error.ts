@@ -1,6 +1,6 @@
-export const ERROR_USER_DATA_INCORRECT = {
-    error: 'USER_DATA_INCORRECT',
-    message: "The user data is not valid. Please review your data and submit it again"
+export const ERROR_INVALID_CREDENTIALS = {
+    error: 'INVALID_CREDENTIALS',
+    message: "The user credentials are not valid. Please review your data and submit it again"
 }
 
 export const ERROR_METHOD_NOT_ALLOWED = {
