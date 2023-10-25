@@ -1,0 +1,79 @@
+// general settings
+
+:root {
+    --color-primary: #3AB795;
+    --color-primary-hover: #47D5AF;
+    --color-secondary: #F4D06F;
+    --color-secondary-hover: #F7DC94;
+    --color-light-gray: #F6F6F6;
+    --color-medium-gray: #C6C6C6;
+    --color-dark-gray: #8F8F8F;
+}
+
+body{
+    margin: 0;
+}
+
+// stucture
+
+.container{
+    padding: 1rem;
+}
+
+// backgrounds
+
+.bgLight{
+    background-color: var(--color-light-gray);
+}
+
+// inputs
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+    padding-left: .3rem;
+    &.Mui-focused{
+        color: var(--color-primary);
+        padding-left: .3rem;
+    }
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    &.Mui-focused{
+        .MuiOutlinedInput-notchedOutline{
+            border-color: var(--color-primary);
+        }
+    }
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    border-radius: 2rem;
+}
+
+// buttons
+
+.button{
+    width: 100%;
+    border-radius: 2rem;
+    &:hover{
+        background-color: var(--color-primary-hover);
+    }
+}
+
+.primaryButton{
+    background-color: var(--color-primary);
+}
+
+// links
+
+.primaryLink{
+    color: var(--color-primary);
+    &:hover{
+        color: var(--color-primary-hover);
+    }
+}
+
+.secondaryLink{
+    color: var(--color-dark-gray);
+    &:hover{
+        color: var(--color-medium-gray);
+    }
+}
