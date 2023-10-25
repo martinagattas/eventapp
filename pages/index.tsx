@@ -1,21 +1,24 @@
+import { Layout } from "eventapp/components/layout/Layout";
 import { NextPage } from "next";
-import Body from "eventapp/components/home/Body"
-import Navbar from "eventapp/components/home/Navbar";
-import Footer from "eventapp/components/home/Footer";
-
-
-
+import Head from "next/head";
 
 const Home: NextPage = () => {
     return(
         <>
-            <div style={{display: "flex", flexDirection: "column"}}>
-            <Navbar></Navbar>
-                <p>Contenido aquí</p>
-                <Footer></Footer>
-                </div>
-        </>   
-                
+            <Head>
+                <title>Eventify</title>
+                <meta property="og:title" content="Eventify" key="title"></meta>
+                <meta name="description" content="Planifica tu evento de forma sencilla y eficaz"/>
+                <meta charSet="utf-8"/>
+                <meta name="evento, app de eventos, organización de eventos, organización"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                {/* <link rel="icon" href="/favicon.ico"/> */}
+            </Head>
+
+            <Layout variant="general">
+                <h1>aquí debo llamar a los componentes</h1>
+            </Layout>
+        </>
     )
 }
 

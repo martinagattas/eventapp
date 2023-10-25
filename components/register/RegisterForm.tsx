@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Link } from "@mui/material"
+import { Box, Button, Container, Grid, Link, Typography } from "@mui/material"
 import { FC, useState } from "react"
 import { CustomInput } from "../form-components/CustomInput"
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -89,8 +89,9 @@ export const RegisterForm: FC = () => {
     };
 
     return(
-        <>
+        <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
+            <Typography variant="h4" mb={2} className="colorPrimary">Registrarme</Typography>
             <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -162,6 +163,6 @@ export const RegisterForm: FC = () => {
             <Box display={"flex"} justifyContent={"center"}>
                 <Link href="/login" underline="none" className="primaryLink">Iniciar sesión</Link>
             </Box>
-        </>
+        </Container>
     )
 }
