@@ -1,78 +1,115 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { Container, Box, Button, Link } from "@mui/material";
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
+import { Box, Button, Grid, Link } from "@mui/material"
+import { FC, useState } from "react"
+import { CustomInput } from "../form-components/CustomInput"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { loginUser } from "eventapp/services/users/users.service"
+import { useRouter } from "next/router"
+import Toast from "../form-components/Toast"
+import { validateEmail, validatePasswordLength } from "utils/validations"
 
-const LoginForm = () => {
+interface FormData {
+    email: string;
+    password: string;
+}
 
-    const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [loginError, setLoginError] = useState('');
+const initialData = {
+    email: '',
+    password: '',
+}
 
-    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    }
+export const LoginForm: FC = () => {
+    const router = useRouter();
+    const { control, handleSubmit } = useForm<FormData>();
 
-    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    }
+    const [emailError, setEmailError] = useState<boolean>(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string | undefined>(undefined);
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const [pswError, setPswError] = useState<boolean>(false);
+    const [pswErrorMessage, setPswErrorMessage] = useState<string | undefined>(undefined);
+
+    const [credentialsError, setCredentialsError] = useState<boolean>(false);
+    const [credentialsErrorMessage, setCredentialsErrorMessage] = useState<string | undefined>(undefined);
+
+    const handleCloseToast = () => {
+        setCredentialsError(false);
+    };
+
+    const onSubmit: SubmitHandler<FormData> = async (formData) => {
+        const emailValidation = validateEmail(formData.email);
+        const passwordValidation = validatePasswordLength(formData.password);
     
-        if (!email.includes('@' && '.com')) {
-            setError('Por favor, ingresá un mail válido.');
-            } else {
-                setError('');
+        setEmailError(emailValidation !== undefined);
+        setEmailErrorMessage(emailValidation);
+        setPswError(passwordValidation !== undefined);
+        setPswErrorMessage(passwordValidation);
+
+        if (emailValidation) {
+            setEmailError(true);
+            setEmailErrorMessage(emailValidation);
+            return;
+        }
+    
+        if (passwordValidation) {
+            setPswError(true);
+            setPswErrorMessage(passwordValidation);
+            return;
         }
 
-        if (password.length < 8) {
-            setPasswordError('La contraseña debe contener al menos 8 caracteres.');
-            } else {
-                setPasswordError('');
+        const response = await loginUser(formData);
+
+        try{
+            if(!response.error){
+                router.push('/');
+            } else{
+                setCredentialsError(true);
+                setCredentialsErrorMessage(`${response.error}: ${response.message}`);
+            }
+        } catch(error: any){
+            setCredentialsError(true);
+            setCredentialsErrorMessage(`${response.error}: ${response.message}`);
         }
+    };
 
-        // simulo las credenciales
-
-        if (email !== 'correct@email.com' || password !== '12345678') {
-            setLoginError('Credenciales inválidas');
-            } else {
-                setLoginError(''); 
-        }
-
-    }
-
-
-    return (
+    return(
         <>
-            <Container style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", backgroundColor: "rgba(191, 195, 199)", width:"100%", height: "100%", overflow: "hidden"}}>
-                <Box style={{backgroundColor: "rgba(228, 232, 237)", width:"50%", height: "80%", marginBlock: "10%", borderRadius: "0.5rem"}}>
-                   
-                    <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBlock: "5%"}}>
-
-                    <div style={{ minHeight: '4rem', width: "40%", }}>
-                        {loginError && <Alert variant="outlined" severity="error">Credenciales inválidas</Alert>}
-                    </div>
-
-                        <TextField id="outlined-basic-mail" label="Mail" variant="outlined" onChange={handleEmailChange} error={error !== ''} helperText={error} style={{marginBlock: "5%", width: "80%"}} />
-                        
-                        <TextField id="outlined-password-input" type="password" label="Contraseña" variant="outlined" onChange={handlePasswordChange} error={passwordError !== ''} helperText={passwordError} style={{marginBlock: "5%", width: "80%"}} />
-
-                        <Button type= "submit" variant="contained" style={{backgroundColor: "rgba(98, 189, 154)", color: "white", width: "50%", margin: "5%", height: "3rem", borderRadius: "0.5rem"}}>Iniciar Sesión</Button>
-
-                        <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", margin: "1%", width: "60%", marginBottom: "4rem"}}>
-                            <Link variant="body2" style={{color: "blue"}} href="">Olvidé mi contraseña</Link>
-                            <Link variant="body2"  style={{color: "blue"}} href="">Registrarme</Link>
-                        </div>
-
-                    </form>
-
-                </Box>
-            </Container>
+            <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <CustomInput
+                            type="email"
+                            name="email"
+                            label="Email"
+                            control={control}
+                            defaultValue={initialData.email}
+                            placeholder="Ej: maria@perez.com"
+                            required={true}
+                            error={emailError}
+                            helperText={emailErrorMessage}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CustomInput
+                            type="password"
+                            name="password"
+                            label="Contraseña"
+                            control={control}
+                            defaultValue={initialData.password}
+                            placeholder="······"
+                            required={true}
+                            error={pswError}
+                            helperText={pswErrorMessage}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button type="submit" variant="contained" className="button primaryButton">Iniciar sesión</Button>
+                    </Grid>
+                </Grid>
+            </Box>
+            <Box display={"flex"} justifyContent={"center"} gap={2}>
+                <Link href="/" underline="none" className="secondaryLink">Olvidé mi contraseña</Link>
+                <Link href="/register" underline="none" className="primaryLink">Registrarme</Link>
+            </Box>
         </>
     )
-} 
-
-export default LoginForm;
+}

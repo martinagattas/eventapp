@@ -1,12 +1,10 @@
 import { NextPage } from "next";
-import LoginForm from "eventapp/components/login/LoginForm";
+import { LoginForm } from "eventapp/components/login/LoginForm";
 
 const Login: NextPage = () => {
     return (
-        <>
-            <LoginForm/>
-        </>
-        );
+        <LoginForm/>
+    )
 }
 
 export default Login;
