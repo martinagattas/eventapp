@@ -1,36 +1,29 @@
-import React from "react";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
+import { Box, List, ListItem, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
+import Image from 'next/image';
 
-
-const FooterLeft = () => {
-    return(
-        <div style={{display: "flex"}}>
-            <img src="../../DigitalHouse_Logo_Black.png" alt="logo"/>
-        </div>
-    )
-}
-
-const SocialMedia = () => {
+export default function Footer() {
     return (
-        <div style={{display: "flex", width: "100%", columnGap: "1rem", justifyContent: "flex-end", marginRight: "2rem" }}>
-            <a href="https://www.linkedin.com/feed/" style={{ color: 'inherit' }}><LinkedInIcon></LinkedInIcon></a>
-            <a href="https://www.linkedin.com/feed/" style={{ color: 'inherit' }}><InstagramIcon></InstagramIcon></a>
-            <a href="https://www.linkedin.com/feed/" style={{ color: 'inherit' }}><FacebookIcon></FacebookIcon></a>
-            <a href="https://www.linkedin.com/feed/" style={{ color: 'inherit' }}><TwitterIcon></TwitterIcon></a>
-        </div>
-    )
-}
-
-const Footer = () => {
-    return (
-        <footer style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "rgba(64, 173, 141)", height: "7rem"}}>
-            <FooterLeft/>
-            <SocialMedia/>
+        <footer>
+            <Box display={'flex'} alignItems={'center'} gap={1}>
+                <Image src="/iso_positive.png" alt="Eventify" width={30} height={30}/>
+                <Typography className="logo">EVENTIFY</Typography>
+            </Box>
+            <List>
+                <ListItem disablePadding>
+                    <Link href="/" underline="none" className="whiteLink"><LinkedIn/></Link>
+                </ListItem>
+                <ListItem disablePadding>
+                    <Link href="/" underline="none" className="whiteLink"><Instagram/></Link>
+                </ListItem>
+                <ListItem disablePadding>
+                    <Link href="/" underline="none" className="whiteLink"><Facebook/></Link>
+                </ListItem>
+                <ListItem disablePadding>
+                    <Link href="/" underline="none" className="whiteLink"><Twitter/></Link>
+                </ListItem>
+            </List>
         </footer>
-    )
+    );
 }
-
-export default Footer
