@@ -1,3 +1,4 @@
+import Header from "eventapp/components/home/Header";
 import { Layout } from "eventapp/components/layout/Layout";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -12,11 +13,11 @@ const Home: NextPage = () => {
                 <meta charSet="utf-8"/>
                 <meta name="evento, app de eventos, organización de eventos, organización"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-                {/* <link rel="icon" href="/favicon.ico"/> */}
+                <link rel="icon" href="/favicon.ico"/>
             </Head>
 
             <Layout variant="general">
-                <h1>aquí debo llamar a los componentes</h1>
+                <Header/>
             </Layout>
         </>
     )

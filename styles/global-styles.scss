@@ -9,37 +9,73 @@
     --color-medium-gray: #C6C6C6;
     --color-dark-gray: #8F8F8F;
     --color-white: #FFFFFF;
-    // font-family: 'Nunito Sans', sans-serif !important;
-    // font-size: 14px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px;
 }
 
 body{
     margin: 0;
 }
 
-// stucture
+// components
 
-.container{
-    padding: 1rem;
+.generalContainer{
+    padding: 0;
+    max-width: none;
 }
 
-.authContainer{
-    background-color: var(--color-light-gray);
-    text-align: center;
+.container{
+    padding: 2rem;
+}
+
+.toolbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    background-image: url('../public/auth-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 8rem);
+
+    & h1{
+        color: var(--color-white);
+        font-size: 3rem !important;
+        letter-spacing: .2rem !important;
+        font-weight: bold !important;
+    }
+
+    & p{
+        letter-spacing: .1rem;
+    }
 }
 
 .authForm{
-    background-color: var(--color-white);
     padding: 1rem;
-    box-shadow: 0 0 1rem var(--color-medium-gray);
-    border-radius: .4rem;
-    height: calc(100vh - 2rem);
+}
+
+// visibility
+
+.hideXs{
+    display: none;
 }
 
 // backgrounds
 
-.bgLight{
+.bgPrimary{
+    background-color: var(--color-primary);
+}
+
+.bgLightGray{
     background-color: var(--color-light-gray);
+}
+
+.bgWhite{
+    background-color: var(--color-white);
 }
 
 // colors
@@ -50,6 +86,16 @@ body{
 
 .colorSecondary{
     color: var(--color-secondary);
+}
+
+.colorGray{
+    color: var(--color-dark-gray);
+}
+
+// texts
+
+h4{
+    font-size: 1.2rem;
 }
 
 // inputs
@@ -79,13 +125,26 @@ body{
 .button{
     width: 100%;
     border-radius: 2rem;
+}
+
+.menuButton{
+    color: var(--color-primary);
+}
+
+.primaryButton{
+    background-color: var(--color-primary);
     &:hover{
         background-color: var(--color-primary-hover);
     }
 }
 
-.primaryButton{
-    background-color: var(--color-primary);
+.whiteOutlineButton{
+    border: .1rem solid var(--color-white);
+    color: var(--color-white);
+    &:hover{
+        border: .1rem solid var(--color-light-gray);
+        color: var(--color-light-gray);
+    }
 }
 
 // links
@@ -97,9 +156,56 @@ body{
     }
 }
 
-.secondaryLink{
+.whiteLink{
+    color: var(--color-white);
+    &:hover{
+        color: var(--color-medium-gray);
+    }
+}
+
+.grayLink{
     color: var(--color-dark-gray);
     &:hover{
         color: var(--color-medium-gray);
+    }
+}
+
+.outlineLink{
+    padding: .4rem .8rem;
+    border: .2rem solid;
+    border-radius: 2rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}
+
+// images
+
+.navbarImage{
+    width: 10rem;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .authForm{
+        width: 50vw;
+    }
+    .hideXs{
+        display: flex;
+    }
+    .hideSm{
+        display: none;
+    }
+    .menuButtonGroup{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        margin-left: 2rem;
+    }
+    main{
+        height: calc(100vh - 9rem);
+        & > div{
+            width: 60vw;
+        }
     }
 }

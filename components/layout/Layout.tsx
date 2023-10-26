@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -9,10 +9,12 @@ interface Props extends PropsWithChildren{
 
 export const Layout: FC<Props> = ({ children, variant }: Props) => {
     return (
-        <Stack className={variant === 'general' ? 'container generalContainer' : 'container authContainer'}>
+        <Stack>
             {variant === 'general' && <Navbar />}
-            {children}
-            {variant === 'general' && <Footer />}
+            <Container className={variant === 'general' ? 'generalContainer' : 'container authContainer'}>
+                {children}
+            </Container>
+            {/* {variant === 'general' && <Footer />} */}
         </Stack>
     );
 }

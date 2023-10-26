@@ -6,6 +6,7 @@ import { loginUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 import Toast from "../form-components/Toast"
 import { validateEmail, validatePasswordLength } from "utils/validations"
+import { ArrowBack } from "@mui/icons-material"
 
 interface FormData {
     email: string;
@@ -73,7 +74,8 @@ export const LoginForm: FC = () => {
     return(
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Typography variant="h4" mb={2} className="colorPrimary">Iniciar sesión</Typography>
+            <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+            <Typography variant="h4" mt={2} mb={4} className="colorGray">Iniciar sesión</Typography>
             <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -107,8 +109,8 @@ export const LoginForm: FC = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <Box display={"flex"} justifyContent={"center"} gap={2}>
-                <Link href="/" underline="none" className="secondaryLink">Olvidé mi contraseña</Link>
+            <Box display={"flex"} justifyContent={"space-between"} gap={2}>
+                <Link href="/" underline="none" className="grayLink">Olvidé mi contraseña</Link>
                 <Link href="/register" underline="none" className="primaryLink">Registrarme</Link>
             </Box>
         </Container>

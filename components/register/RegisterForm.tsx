@@ -6,6 +6,7 @@ import { createUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 import { comparePassword, validateEmail, validatePasswordLength } from "utils/validations"
 import Toast from "../form-components/Toast"
+import { ArrowBack } from "@mui/icons-material"
 
 interface FormData {
     name: string;
@@ -91,7 +92,8 @@ export const RegisterForm: FC = () => {
     return(
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Typography variant="h4" mb={2} className="colorPrimary">Registrarme</Typography>
+            <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+            <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
             <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -161,7 +163,7 @@ export const RegisterForm: FC = () => {
                 </Grid>
             </Box>
             <Box display={"flex"} justifyContent={"center"}>
-                <Link href="/login" underline="none" className="primaryLink">Iniciar sesión</Link>
+                <Link href="/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
             </Box>
         </Container>
     )
