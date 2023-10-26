@@ -11,7 +11,7 @@ export const Layout: FC<Props> = ({ children, variant }: Props) => {
     return (
         <Stack>
             {variant === 'general' && <Navbar />}
-            <Container className={variant === 'general' ? 'generalContainer' : 'container authContainer'}>
+            <Container className={variant === 'general' ? 'generalContainer' : 'authContainer'}>
                 {children}
             </Container>
             {/* {variant === 'general' && <Footer />} */}

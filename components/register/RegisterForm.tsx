@@ -92,78 +92,83 @@ export const RegisterForm: FC = () => {
     return(
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
-            <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
-            <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="text"
-                            name="name"
-                            label="Nombre"
-                            control={control}
-                            defaultValue={initialData.name}
-                            placeholder="Ej: María"
-                            required={true}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="text"
-                            name="surname"
-                            label="Apellido"
-                            control={control}
-                            defaultValue={initialData.surname}
-                            placeholder="Ej: Pérez"
-                            required={true}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="email"
-                            name="email"
-                            label="Email"
-                            control={control}
-                            defaultValue={initialData.email}
-                            placeholder="Ej: maria@perez.com"
-                            required={true}
-                            error={emailError}
-                            helperText={emailErrorMessage}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="password"
-                            name="password"
-                            label="Contraseña"
-                            control={control}
-                            defaultValue={initialData.password}
-                            placeholder="······"
-                            required={true}
-                            error={pswError}
-                            helperText={pswErrorMessage}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="password"
-                            name="confirmPassword"
-                            label="Confirmar contraseña"
-                            control={control}
-                            defaultValue={initialData.confirmPassword}
-                            placeholder="······"
-                            required={true}
-                            error={confirmPswError}
-                            helperText={confirmPswErrorMessage}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" variant="contained" className="button primaryButton">Registrarme</Button>
-                    </Grid>
-                </Grid>
+            <Box className="authImgBox hideXs">
+                <Link href="/" underline="none" className="whiteLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
             </Box>
-            <Box display={"flex"} justifyContent={"center"}>
-                <Link href="/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
+            <Box className="authFormBox">
+                <Link href="/" underline="none" className="grayLink hideSm" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
+                <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="text"
+                                name="name"
+                                label="Nombre"
+                                control={control}
+                                defaultValue={initialData.name}
+                                placeholder="Ej: María"
+                                required={true}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="text"
+                                name="surname"
+                                label="Apellido"
+                                control={control}
+                                defaultValue={initialData.surname}
+                                placeholder="Ej: Pérez"
+                                required={true}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="email"
+                                name="email"
+                                label="Email"
+                                control={control}
+                                defaultValue={initialData.email}
+                                placeholder="Ej: maria@perez.com"
+                                required={true}
+                                error={emailError}
+                                helperText={emailErrorMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="password"
+                                name="password"
+                                label="Contraseña"
+                                control={control}
+                                defaultValue={initialData.password}
+                                placeholder="······"
+                                required={true}
+                                error={pswError}
+                                helperText={pswErrorMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="password"
+                                name="confirmPassword"
+                                label="Confirmar contraseña"
+                                control={control}
+                                defaultValue={initialData.confirmPassword}
+                                placeholder="······"
+                                required={true}
+                                error={confirmPswError}
+                                helperText={confirmPswErrorMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button type="submit" variant="contained" className="button primaryButton">Registrarme</Button>
+                        </Grid>
+                    </Grid>
+                </Box>
+                <Box display={"flex"} justifyContent={"center"}>
+                    <Link href="/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
+                </Box>
             </Box>
         </Container>
     )

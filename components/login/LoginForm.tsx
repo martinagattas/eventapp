@@ -74,44 +74,49 @@ export const LoginForm: FC = () => {
     return(
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
-            <Typography variant="h4" mt={2} mb={4} className="colorGray">Iniciar sesión</Typography>
-            <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="email"
-                            name="email"
-                            label="Email"
-                            control={control}
-                            defaultValue={initialData.email}
-                            placeholder="Ej: maria@perez.com"
-                            required={true}
-                            error={emailError}
-                            helperText={emailErrorMessage}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CustomInput
-                            type="password"
-                            name="password"
-                            label="Contraseña"
-                            control={control}
-                            defaultValue={initialData.password}
-                            placeholder="······"
-                            required={true}
-                            error={pswError}
-                            helperText={pswErrorMessage}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" variant="contained" className="button primaryButton">Iniciar sesión</Button>
-                    </Grid>
-                </Grid>
+            <Box className="authImgBox hideXs">
+                <Link href="/" underline="none" className="whiteLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
             </Box>
-            <Box display={"flex"} justifyContent={"space-between"} gap={2}>
-                <Link href="/" underline="none" className="grayLink">Olvidé mi contraseña</Link>
-                <Link href="/register" underline="none" className="primaryLink">Registrarme</Link>
+            <Box className="authFormBox">
+                <Link href="/" underline="none" className="grayLink hideSm" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Typography variant="h4" mt={2} mb={4} className="colorGray">Iniciar sesión</Typography>
+                <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="email"
+                                name="email"
+                                label="Email"
+                                control={control}
+                                defaultValue={initialData.email}
+                                placeholder="Ej: maria@perez.com"
+                                required={true}
+                                error={emailError}
+                                helperText={emailErrorMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="password"
+                                name="password"
+                                label="Contraseña"
+                                control={control}
+                                defaultValue={initialData.password}
+                                placeholder="······"
+                                required={true}
+                                error={pswError}
+                                helperText={pswErrorMessage}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button type="submit" variant="contained" className="button primaryButton">Iniciar sesión</Button>
+                        </Grid>
+                    </Grid>
+                </Box>
+                <Box display={"flex"} justifyContent={"space-between"} gap={2}>
+                    <Link href="/" underline="none" className="grayLink">Olvidé mi contraseña</Link>
+                    <Link href="/register" underline="none" className="primaryLink">Registrarme</Link>
+                </Box>
             </Box>
         </Container>
     )

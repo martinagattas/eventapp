@@ -17,6 +17,10 @@ body{
     margin: 0;
 }
 
+.container{
+    padding: 2rem;
+}
+
 // components
 
 .generalContainer{
@@ -24,8 +28,12 @@ body{
     max-width: none;
 }
 
-.container{
+.authContainer{
     padding: 2rem;
+    height: 100vh;
+    & .authForm{
+        padding: 0;
+    }
 }
 
 .toolbar{
@@ -52,10 +60,6 @@ main{
     & p{
         letter-spacing: .1rem;
     }
-}
-
-.authForm{
-    padding: 1rem;
 }
 
 // visibility
@@ -186,9 +190,6 @@ h4{
 }
 
 @media (min-width: 768px) {
-    .authForm{
-        width: 50vw;
-    }
     .hideXs{
         display: flex;
     }
@@ -206,6 +207,40 @@ h4{
         height: calc(100vh - 9rem);
         & > div{
             width: 60vw;
+        }
+    }
+    .authContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .authForm{
+            display: flex;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 1rem 1rem 2rem var(--color-light-gray);
+            & > div{
+                padding: 2rem;
+                &.authImgBox{
+                    background-image: url('../public/auth-background.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    width: 40%;
+                }
+                &.authFormBox{
+                    width: 60%;
+                    & h4{
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 992px){
+    .authContainer{
+        & .authForm{
+            width: 70%;
         }
     }
 }
