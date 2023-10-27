@@ -9,10 +9,22 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Link } from '@mui/material';
 import Image from 'next/image';
+import { logOut } from '../../services/users/users.service';
 
 export default function Navbar() {
     const [auth, setAuth] = React.useState(false);
+    const [userEmail, setUserEmail] = React.useState('');
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    
+    React.useEffect(() => {
+        const localLogin = localStorage.getItem('loginUser');
+        if (localLogin) {
+            setAuth(true);
+            const { email } = JSON.parse(localLogin);
+            setUserEmail(email);
+        }
+    });
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -21,6 +33,12 @@ export default function Navbar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleLogOut = () => {
+        logOut();
+        setUserEmail('')
+        setAuth(false);
+    }
 
     return (
         <AppBar position="static" className="bgWhite">
@@ -43,7 +61,9 @@ export default function Navbar() {
                 </Box>
 
                 {auth ? (
+
                     <Box>
+                        <span className="primaryLink" >{userEmail}  </span>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -51,6 +71,7 @@ export default function Navbar() {
                             aria-haspopup="true"
                             onClick={handleMenu}
                             color="inherit"
+
                         >
                             <AccountCircle />
                         </IconButton>
@@ -71,6 +92,7 @@ export default function Navbar() {
                         >
                             <MenuItem onClick={handleClose}>Profile</MenuItem>
                             <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
                         </Menu>
                     </Box>
                 ) : (

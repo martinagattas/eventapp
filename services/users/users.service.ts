@@ -15,7 +15,12 @@ export const loginUser = async (data: LoginType): Promise<any> => {
         body: userData,
     });
 
+    localStorage.setItem('loginUser', userData);
     return await response.json();
+}
+
+export const logOut = async () => {
+    localStorage.removeItem('loginUser');
 }
 
 export const createUser = async (data: RegisterType): Promise<any> => {
