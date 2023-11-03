@@ -74,11 +74,9 @@ export const LoginForm: FC = () => {
     return(
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Box className="authImgBox hideXs">
-                <Link href="/" underline="none" className="whiteLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
-            </Box>
+            <Box className="authImgBox hideXs"></Box>
             <Box className="authFormBox">
-                <Link href="/" underline="none" className="grayLink hideSm" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Iniciar sesión</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
@@ -113,9 +111,10 @@ export const LoginForm: FC = () => {
                         </Grid>
                     </Grid>
                 </Box>
-                <Box display={"flex"} justifyContent={"space-between"} gap={2}>
+                <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2}>
                     <Link href="/" underline="none" className="grayLink">Olvidé mi contraseña</Link>
-                    <Link href="/register" underline="none" className="primaryLink">Registrarme</Link>
+                    <Link href="/clients/register" underline="none" className="primaryLink">Registrarme</Link>
+                    <Link href="/providers/register" underline="none" className="secondaryLink">Registrarme como proveedor</Link>
                 </Box>
             </Box>
         </Container>
