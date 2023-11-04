@@ -1,0 +1,51 @@
+// inputs
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+    padding-left: .3rem;
+    .Mui-focused{
+        color: var(--color-primary);
+        padding-left: .3rem;
+    }
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    .Mui-focused{
+        .MuiOutlinedInput-notchedOutline{
+            border-color: var(--color-primary);
+        }
+    }
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    border-radius: 2rem;
+}
+
+@media screen and (min-width: 768px){
+    .authForm{
+        display: flex;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 1rem 1rem 2rem var(--color-light-gray);
+        & > div{
+            padding: 2rem;
+            .authImgBox{
+                background-image: url('../public/auth-background.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 40%;
+            }
+            .authFormBox{
+                width: 60%;
+                h4{
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px){
+    .authForm{
+        width: 70%;
+    }
+}

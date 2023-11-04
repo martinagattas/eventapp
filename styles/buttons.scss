@@ -1,0 +1,95 @@
+// buttons
+
+.button{
+    width: 100%;
+    border-radius: 2rem;
+}
+
+.menuButton{
+    color: var(--color-primary);
+    padding: 0;
+}
+
+.primaryButton{
+    background-color: var(--color-primary);
+    &:hover{
+        background-color: var(--color-primary-hover);
+    }
+}
+
+.whiteOutlineButton{
+    border: .1rem solid var(--color-white);
+    color: var(--color-white);
+    &:hover{
+        border: .1rem solid var(--color-light-gray);
+        color: var(--color-light-gray);
+    }
+}
+
+// links
+
+.link{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}
+
+.primaryLink{
+    color: var(--color-primary);
+    &:hover{
+        color: var(--color-primary-hover);
+    }
+}
+
+.secondaryLink{
+    color: var(--color-secondary);
+    &:hover{
+        color: var(--color-secondary-hover);
+    }
+}
+
+.whiteLink{
+    color: var(--color-white);
+    &:hover{
+        color: var(--color-medium-gray);
+    }
+}
+
+.grayLink{
+    color: var(--color-dark-gray);
+    &:hover{
+        color: var(--color-medium-gray);
+    }
+}
+
+.buttonLink{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: var(--color-white);
+    border-radius: 2rem;
+    border: .2rem solid;
+    padding: 0.4rem 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.buttonPrimaryLink{
+    background-color: var(--color-primary);
+    border: 0.2rem solid var(--color-primary);
+    &:hover{
+        background-color: var(--color-primary-hover);
+    }
+}
+
+.buttonOutlineLink{
+    text-align: center;
+    padding: .4rem .8rem;
+    border: .2rem solid;
+    border-radius: 2rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}

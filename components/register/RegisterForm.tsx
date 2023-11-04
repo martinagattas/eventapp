@@ -167,7 +167,7 @@ export const RegisterForm: FC = () => {
                     </Grid>
                 </Box>
                 <Box display={"flex"} justifyContent={"center"}>
-                    <Link href="/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
+                    <Link href="/clients/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
                 </Box>
             </Box>
         </Container>

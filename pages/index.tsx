@@ -1,4 +1,4 @@
-import Header from "eventapp/components/home/Header";
+import Hero from "eventapp/components/home/Hero";
 import { Layout } from "eventapp/components/layout/Layout";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
             </Head>
 
             <Layout variant="general">
-                <Header/>
+                {/* <Hero/> */}
             </Layout>
         </>
     )

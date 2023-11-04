@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,76 +9,125 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Link } from '@mui/material';
 import Image from 'next/image';
+import { logOut } from '../../services/users/users.service';
+import { Logout, Redeem, Settings, SupervisorAccount } from "@mui/icons-material";
 
 export default function Navbar() {
-    const [auth, setAuth] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [auth, setAuth] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+    const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
+    const [appBarMenu, setAppBarMenu] = useState<null | HTMLElement>(null);
+
+    useEffect(() => {
+        const localLogin = localStorage.getItem('loginUser');
+        if (localLogin) {
+            setAuth(true);
+            const { email } = JSON.parse(localLogin);
+            setUserEmail(email);
+        }
+    }, []);
+
+    const handleAppBarMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAppBarMenu(event.currentTarget);
+    };
+
+    const handleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setUserMenu(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setUserMenu(null);
+        setAppBarMenu(null);
     };
+
+    const handleLogOut = () => {
+        logOut();
+        setUserEmail('')
+        setAuth(false);
+    }
 
     return (
         <AppBar position="static" className="bgWhite">
             <Toolbar className="toolbar">
-                <Box display={"flex"} alignItems={"center"}>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        className="menuButton hideSm"
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Image src="/logo_positive.png" alt="Eventify" width={387} height={90} className="navbarImage"/>
-                    <Box className="menuButtonGroup hideXs">
-                        <Link href="/" underline="none" className="primaryLink">Servicios</Link>
-                        <Link href="/" underline="none" className="primaryLink">Proveedores</Link>
+                <Box display={"flex"} alignItems={"center"} gap={4}>
+                    <Link href="/" underline="none"><Image src="/logo_positive.png" alt="Eventify" width={387} height={90} className="navbarImage"/></Link>
+                    <Box className="menuButtonGroup hideXs hideSm">
+                        <Link href="/services" underline="none" className="link primaryLink"><Redeem/> Servicios</Link>
+                        <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Proveedores</Link>
                     </Box>
                 </Box>
-
                 {auth ? (
-                    <Box>
+                    <Box display={"flex"} alignItems={"center"} gap={.5}>
+                        <span className="colorPrimary hideXs">{userEmail}</span>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
+                            aria-controls="user-menu"
                             aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
+                            onClick={handleUserMenu}
                         >
                             <AccountCircle />
                         </IconButton>
                         <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                            }}
-                            open={Boolean(anchorEl)}
+                            id="user-menu"
+                            anchorEl={userMenu}
+                            open={Boolean(userMenu)}
                             onClose={handleClose}
+                            className="appBar"
                         >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/users/profile" underline="none" className="link primaryLink"><AccountCircle/> Mi perfil</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/users/account" underline="none" className="link primaryLink"><Settings/> Mi cuenta</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleLogOut}>
+                                <Link underline="none" className="link primaryLink"><Logout/> Cerrar sesión</Link>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 ) : (
-                    <Box display={"flex"} alignItems={"center"} gap={2}>
-                        <Link href="/register" underline="none" className="outlineLink primaryLink hideSm">Ingresar</Link>
-                        <Link href="/login" underline="none" className="primaryLink hideXs">Iniciar sesión</Link>
-                        <Link href="/register" underline="none" className="outlineLink primaryLink hideXs">Registrarme</Link>
-                    </Box>
+                    <>
+                        <IconButton
+                            size="large"
+                            aria-label="menu"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleAppBarMenu}
+                            className="menuButton hideMd"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={appBarMenu}
+                            open={Boolean(appBarMenu)}
+                            onClose={handleClose}
+                            className="appBar"
+                        >
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/services" underline="none" className="link primaryLink"><Redeem/> Servicios</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Proveedores</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/providers/register" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/clients/login" underline="none" className="buttonOutlineLink primaryLink">Iniciar sesión</Link>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link href="/clients/register" underline="none" className="buttonLink buttonPrimaryLink">Registrarme</Link>
+                            </MenuItem>
+                        </Menu>
+                        <Box display={"flex"} alignItems={"center"} gap={2} className="hideXs hideSm">
+                            <Link href="/providers/register" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
+                            <Link href="/clients/login" underline="none" className="buttonOutlineLink primaryLink">Iniciar sesión</Link>
+                            <Link href="/clients/register" underline="none" className="buttonLink buttonPrimaryLink">Registrarme</Link>
+                        </Box>
+                    </>
                 )}
             </Toolbar>
         </AppBar>
