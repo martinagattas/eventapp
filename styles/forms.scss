@@ -23,22 +23,23 @@
 @media screen and (min-width: 768px){
     .authForm{
         display: flex;
-        border-radius: 1rem;
-        overflow: hidden;
-        box-shadow: 1rem 1rem 2rem var(--color-light-gray);
         & > div{
-            padding: 2rem;
-            .authImgBox{
-                background-image: url('../public/auth-background.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                width: 40%;
-            }
-            .authFormBox{
+            width: 50%;
+            &.authImgBox{
+                height: 100vh;
+                position: relative;
+                overflow: hidden;
                 width: 60%;
-                h4{
-                    margin-top: 0;
+                img{
+                    position: absolute;
+                    height: inherit;
+                    width: auto;
                 }
+            }
+            &.authFormBox{
+                height: calc(100vh - 4rem);
+                padding: 2rem;
+                overflow: scroll;
             }
         }
     }
@@ -46,6 +47,10 @@
 
 @media screen and (min-width: 992px){
     .authForm{
-        width: 70%;
+        & > div{
+            &.authFormBox{
+                padding: 2rem 4rem;
+            }
+        }
     }
 }

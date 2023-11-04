@@ -7,6 +7,7 @@ import { useRouter } from "next/router"
 import { comparePassword, validateEmail, validatePasswordLength } from "utils/validations"
 import Toast from "../form-components/Toast"
 import { ArrowBack } from "@mui/icons-material"
+import Image from "next/image"
 
 interface FormData {
     name: string;
@@ -93,10 +94,10 @@ export const RegisterForm: FC = () => {
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
             <Box className="authImgBox hideXs">
-                <Link href="/" underline="none" className="whiteLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Image width={256} height={171} src={"/auth-background.png"} alt={"Registrarme"}/>
             </Box>
             <Box className="authFormBox">
-                <Link href="/" underline="none" className="grayLink hideSm" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
