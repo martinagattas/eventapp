@@ -82,7 +82,7 @@ export default function Navbar() {
                             <MenuItem onClick={handleClose}>
                                 <Link href="/users/account" underline="none" className="link primaryLink"><Settings/> Mi cuenta</Link>
                             </MenuItem>
-                            <MenuItem onClick={handleLogOut}>
+                            <MenuItem onClick={handleLogOut} className="buttonsBox">
                                 <Link underline="none" className="link primaryLink"><Logout/> Cerrar sesión</Link>
                             </MenuItem>
                         </Menu>
@@ -115,10 +115,8 @@ export default function Navbar() {
                             <MenuItem onClick={handleClose}>
                                 <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={handleClose} className="buttonsBox">
                                 <Link href="/clients/login" underline="none" className="buttonOutlineLink primaryLink">Iniciar sesión</Link>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
                                 <Link href="/clients/register" underline="none" className="buttonLink buttonPrimaryLink">Registrarme</Link>
                             </MenuItem>
                         </Menu>
