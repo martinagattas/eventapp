@@ -113,7 +113,7 @@ export default function Navbar() {
                                 <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Proveedores</Link>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
-                                <Link href="/providers/register" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
+                                <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <Link href="/clients/login" underline="none" className="buttonOutlineLink primaryLink">Iniciar sesión</Link>
@@ -123,7 +123,7 @@ export default function Navbar() {
                             </MenuItem>
                         </Menu>
                         <Box display={"flex"} alignItems={"center"} gap={2} className="hideXs hideSm">
-                            <Link href="/providers/register" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
+                            <Link href="/providers" underline="none" className="link primaryLink"><SupervisorAccount/> Admin</Link>
                             <Link href="/clients/login" underline="none" className="buttonOutlineLink primaryLink">Iniciar sesión</Link>
                             <Link href="/clients/register" underline="none" className="buttonLink buttonPrimaryLink">Registrarme</Link>
                         </Box>
