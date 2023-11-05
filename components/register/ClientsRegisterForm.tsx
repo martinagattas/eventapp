@@ -2,24 +2,30 @@ import { Box, Button, Container, Grid, Link, Typography } from "@mui/material"
 import { FC, useState } from "react"
 import { CustomInput } from "../form-components/CustomInput"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { loginUser } from "eventapp/services/users/users.service"
+import { createUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
+import { comparePassword, validateEmail, validatePasswordLength } from "utils/validations"
 import Toast from "../form-components/Toast"
-import { validateEmail, validatePasswordLength } from "utils/validations"
 import { ArrowBack } from "@mui/icons-material"
 import Image from "next/image"
 
 interface FormData {
+    name: string;
+    surname: string;
     email: string;
     password: string;
+    confirmPassword: string;
 }
 
 const initialData = {
+    name: '',
+    surname: '',
     email: '',
     password: '',
+    confirmPassword: ''
 }
 
-export const LoginForm: FC = () => {
+export const ClientsRegisterForm: FC = () => {
     const router = useRouter();
     const { control, handleSubmit } = useForm<FormData>();
 
@@ -28,6 +34,9 @@ export const LoginForm: FC = () => {
 
     const [pswError, setPswError] = useState<boolean>(false);
     const [pswErrorMessage, setPswErrorMessage] = useState<string | undefined>(undefined);
+
+    const [confirmPswError, setConfirmPswError] = useState<boolean>(false);
+    const [confirmPswErrorMessage, setConfirmPswErrorMessage] = useState<string | undefined>(undefined);
 
     const [credentialsError, setCredentialsError] = useState<boolean>(false);
     const [credentialsErrorMessage, setCredentialsErrorMessage] = useState<string | undefined>(undefined);
@@ -39,12 +48,15 @@ export const LoginForm: FC = () => {
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
         const emailValidation = validateEmail(formData.email);
         const passwordValidation = validatePasswordLength(formData.password);
-    
+        const passwordComparation = comparePassword(formData.password, formData.confirmPassword);
+
         setEmailError(emailValidation !== undefined);
         setEmailErrorMessage(emailValidation);
         setPswError(passwordValidation !== undefined);
         setPswErrorMessage(passwordValidation);
-
+        setConfirmPswError(passwordComparation !== undefined);
+        setConfirmPswErrorMessage(passwordComparation);
+    
         if (emailValidation) {
             setEmailError(true);
             setEmailErrorMessage(emailValidation);
@@ -57,7 +69,13 @@ export const LoginForm: FC = () => {
             return;
         }
 
-        const response = await loginUser(formData);
+        if (passwordComparation) {
+            setConfirmPswError(true);
+            setConfirmPswErrorMessage(passwordComparation);
+            return;
+        }
+
+        const response = await createUser(formData);
 
         try{
             if(!response.error){
@@ -76,13 +94,37 @@ export const LoginForm: FC = () => {
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
             <Box className="authImgBox hideXs">
-                <Image width={256} height={171} src={"/auth-background.png"} alt={"Iniciar sesión"}/>
+                <Image width={256} height={171} src={"/auth-background.png"} alt={"Registrarme"}/>
             </Box>
             <Box className="authFormBox">
                 <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
-                <Typography variant="h4" mt={2} mb={4} className="colorGray">Iniciar sesión</Typography>
+                <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="text"
+                                name="name"
+                                label="Nombre"
+                                control={control}
+                                defaultValue={initialData.name}
+                                placeholder="Ej: María"
+                                required={true}
+                                className="input"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CustomInput
+                                type="text"
+                                name="surname"
+                                label="Apellido"
+                                control={control}
+                                defaultValue={initialData.surname}
+                                placeholder="Ej: Pérez"
+                                required={true}
+                                className="input"
+                            />
+                        </Grid>
                         <Grid item xs={12}>
                             <CustomInput
                                 type="email"
@@ -94,6 +136,7 @@ export const LoginForm: FC = () => {
                                 required={true}
                                 error={emailError}
                                 helperText={emailErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -107,17 +150,30 @@ export const LoginForm: FC = () => {
                                 required={true}
                                 error={pswError}
                                 helperText={pswErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button type="submit" variant="contained" className="button primaryButton">Iniciar sesión</Button>
+                            <CustomInput
+                                type="password"
+                                name="confirmPassword"
+                                label="Confirmar contraseña"
+                                control={control}
+                                defaultValue={initialData.confirmPassword}
+                                placeholder="······"
+                                required={true}
+                                error={confirmPswError}
+                                helperText={confirmPswErrorMessage}
+                                className="input"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button type="submit" variant="contained" className="button primaryButton">Registrarme</Button>
                         </Grid>
                     </Grid>
                 </Box>
-                <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2}>
-                    <Link href="/" underline="none" className="grayLink">Olvidé mi contraseña</Link>
-                    <Link href="/clients/register" underline="none" className="primaryLink"><span className="colorGray">¿Aún no tienes usuario?</span> Haz clic aquí</Link>
-                    <Link href="/providers/register" underline="none" className="primaryLink"><span className="colorGray">¿Eres proveedor?</span> Haz clic aquí</Link>
+                <Box display={"flex"} justifyContent={"center"}>
+                    <Link href="/clients/login" underline="none" className="primaryLink"><span className="colorGray">¿Ya tienes usuario?</span> Haz clic aquí</Link>
                 </Box>
             </Box>
         </Container>
