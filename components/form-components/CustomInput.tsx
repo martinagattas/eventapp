@@ -12,7 +12,8 @@ export const CustomInput = ({
     defaultValue,
     error,
     helperText,
-    textFieldProps
+    textFieldProps,
+    className
 }: CustomInputType) => {
     return(
         <Controller
@@ -31,6 +32,7 @@ export const CustomInput = ({
                     error={error}
                     helperText={helperText}
                     {...textFieldProps}
+                    className={className}
                 />
             )}
         />

@@ -4,6 +4,7 @@ import { Box, Button, Container, Grid, Link, Typography, Select, MenuItem, FormC
 import { ArrowBack } from "@mui/icons-material"
 import { CustomInput } from "../form-components/CustomInput"
 import { validateTitleLength, validateShortDescriptionLength, validateLongDescriptionLength, validatePrice } from "utils/validations"
+import { CustomSelect } from "../form-components/CustomSelect"
 
 interface FormData {
     title: string;
@@ -99,7 +100,7 @@ export const NewServiceForm: FC = () => {
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Añadir nuevo servicio</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={6}>
                             <CustomInput
                                 type="text"
                                 name="title"
@@ -110,9 +111,10 @@ export const NewServiceForm: FC = () => {
                                 required={true}
                                 error={titleError}
                                 helperText={titleErrorMessage}
+                                className="input"
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={6}>
                             <CustomInput
                                 type="text"
                                 name="shortDescription"
@@ -123,6 +125,7 @@ export const NewServiceForm: FC = () => {
                                 required={true}
                                 error={shortDescError}
                                 helperText={shortDescErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -136,6 +139,7 @@ export const NewServiceForm: FC = () => {
                                 required={true}
                                 error={longDescError}
                                 helperText={longDescMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -161,6 +165,7 @@ export const NewServiceForm: FC = () => {
                                             accept="image/*"
                                         />
                                         {imagePreview && (
+                                            // eslint-disable-next-line @next/next/no-img-element
                                             <img
                                                 src={imagePreview}
                                                 alt="Vista previa de la imagen"
@@ -172,32 +177,21 @@ export const NewServiceForm: FC = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth variant="outlined">
-                                <InputLabel id="currency-label">Moneda</InputLabel>
-                                <Controller
-                                  name="currency"
-                                  control={control}
-                                  defaultValue={initialData.currency}
-                                  render={({ field }) => (
-                                    <Select
-                                      {...field}
-                                      label="Moneda"
-                                      labelId="currency-label"
-                                      fullWidth
-                                      required
-                                      displayEmpty
-                                    >
-                                        <MenuItem value="" disabled />
-                                               
-                                      {currencyOptions.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                          {option.label}
-                                        </MenuItem>
-                                      ))}
-                                    </Select>
-                                  )}
-                                />
-                            </FormControl>
+                            <CustomSelect
+                                name="currency"
+                                label="Moneda"
+                                control={control}
+                                defaultValue={initialData.currency}
+                                required={true}
+                                className="select"
+                            >
+                                <MenuItem value="" disabled />
+                                {currencyOptions.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                                ))}
+                            </CustomSelect>
                         </Grid>
                         <Grid item xs={12}>
                             <CustomInput
@@ -211,6 +205,7 @@ export const NewServiceForm: FC = () => {
                                 // inputProps={{ inputMode: "numeric" }}
                                 error={priceError}
                                 helperText={priceErrorMessage}
+                                className="input"
                             />
                         </Grid>
                     </Grid>

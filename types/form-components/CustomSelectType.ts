@@ -1,15 +1,15 @@
 import { Control } from 'react-hook-form';
 
-export type CustomInputType = {
+export type CustomSelectType = {
     name: string,
     label: string,
-    type: string,
     required?: boolean,
     control: Control<any>,
-    placeholder?: string,
     defaultValue?: string,
+    displayEmpty?: boolean,
     error?: boolean,
     helperText?: string,
-    textFieldProps?: Record<string, any>,
+    selectProps?: Record<string, any>,
+    children: React.ReactNode,
     className?: string
 }
