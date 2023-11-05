@@ -1,6 +1,6 @@
 // inputs
 
-.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+.input > label{
     padding-left: .3rem;
     .Mui-focused{
         color: var(--color-primary);
@@ -8,7 +8,7 @@
     }
 }
 
-.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+.select, .input > div{
     .Mui-focused{
         .MuiOutlinedInput-notchedOutline{
             border-color: var(--color-primary);
@@ -16,7 +16,7 @@
     }
 }
 
-.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+.select, .input > div{
     border-radius: 2rem;
 }
 
