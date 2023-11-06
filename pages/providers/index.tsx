@@ -1,12 +1,13 @@
 import { Layout } from "eventapp/components/layout/Layout";
+import { ProvidersLoginForm } from "eventapp/components/login/ProvidersLoginForm";
 import { NextPage } from "next";
 import Head from "next/head";
 
-const ProvidersHome: NextPage = () => {
+const Home: NextPage = () => {
     return(
         <>
             <Head>
-                <title>Eventify</title>
+                <title>Eventify | Proveedores</title>
                 <meta property="og:title" content="Eventify" key="title"></meta>
                 <meta name="description" content="Planifica tu evento de forma sencilla y eficaz"/>
                 <meta charSet="utf-8"/>
@@ -16,10 +17,10 @@ const ProvidersHome: NextPage = () => {
             </Head>
 
             <Layout variant="general">
-                {/* <Hero/> */}
+                <ProvidersLoginForm/>
             </Layout>
         </>
     )
 }
 
-export default ProvidersHome;
+export default Home;
