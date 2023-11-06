@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { loginUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 import { validateEmail, validatePasswordLength } from "utils/validations"
-import Toast from "../form-components/Toast"
+import { Toast } from "../form-components/Toast"
 
 interface FormData {
     email: string;

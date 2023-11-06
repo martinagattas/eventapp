@@ -1,10 +1,8 @@
 import { Box, Container, Link, Typography } from "@mui/material"
-import { FC } from "react"
 import Image from "next/image"
 import { LoginForm } from "./LoginForm"
 
-export const ProvidersLoginForm: FC = () => {
-
+export const ProvidersLoginForm = () => {
     return(
         <Container className="authForm">
             <Box className="authImgBox hideXs">
