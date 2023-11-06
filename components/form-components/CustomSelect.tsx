@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form"
 import { CustomSelectType } from "types/form-components/CustomSelectType"
-import { FormHelperText, Select } from "@mui/material"
+import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material"
 
 export const CustomSelect = ({
     name,
@@ -8,10 +8,12 @@ export const CustomSelect = ({
     required,
     control,
     defaultValue,
+    value,
     displayEmpty,
     error,
     helperText,
     selectProps,
+    onChange,
     children,
     className
 }: CustomSelectType) => {
@@ -21,7 +23,8 @@ export const CustomSelect = ({
             control={control}
             defaultValue={defaultValue}
             render={({ field }) => (
-                <>
+                <FormControl fullWidth>
+                    <InputLabel>{label}</InputLabel>
                     <Select
                         variant="outlined"
                         fullWidth
@@ -31,12 +34,14 @@ export const CustomSelect = ({
                         displayEmpty={displayEmpty}
                         error={error}
                         {...selectProps}
+                        value={value}
+                        onChange={onChange}
                         className={className}
                     >
                         {children}
                     </Select>
                     <FormHelperText>{helperText}</FormHelperText>
-                </>
+                </FormControl>
             )}
         />
     )

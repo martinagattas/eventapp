@@ -1,6 +1,6 @@
 import { FC, useState } from "react"
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
-import { Box, Button, Container, Grid, Link, Typography, Select, MenuItem, FormControl, InputLabel } from "@mui/material"
+import { Box, Button, Container, Grid, Link, Typography, MenuItem, SelectChangeEvent } from "@mui/material"
 import { ArrowBack } from "@mui/icons-material"
 import { CustomInput } from "../form-components/CustomInput"
 import { validateTitleLength, validateShortDescriptionLength, validateLongDescriptionLength, validatePrice } from "utils/validations"
@@ -83,6 +83,12 @@ export const NewServiceForm: FC = () => {
     const { control, handleSubmit } = useForm<FormData>();
 
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+    const [currency, setCurrency] = useState<string>('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setCurrency(event.target.value);
+    };
 
     const currencyOptions = [
         { value: 'ARS', label: 'PESO ARGENTINO' },
@@ -182,7 +188,9 @@ export const NewServiceForm: FC = () => {
                                 label="Moneda"
                                 control={control}
                                 defaultValue={initialData.currency}
+                                value={currency}
                                 required={true}
+                                onChange={handleChange}
                                 className="select"
                             >
                                 <MenuItem value="" disabled />

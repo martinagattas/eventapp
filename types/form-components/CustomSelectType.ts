@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@mui/material';
 import { Control } from 'react-hook-form';
 
 export type CustomSelectType = {
@@ -5,11 +6,13 @@ export type CustomSelectType = {
     label: string,
     required?: boolean,
     control: Control<any>,
-    defaultValue?: string,
+    defaultValue?: any,
+    value: any,
     displayEmpty?: boolean,
     error?: boolean,
     helperText?: string,
     selectProps?: Record<string, any>,
+    onChange: (event: SelectChangeEvent) => void;
     children: React.ReactNode,
     className?: string
 }
