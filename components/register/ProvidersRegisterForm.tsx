@@ -107,7 +107,7 @@ export const ProvidersRegisterForm: FC = () => {
     return(
         <Container>
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
-            <Box className="authFormBox">
+            <Box>
                 <Link href="/providers" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>

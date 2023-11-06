@@ -4,7 +4,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Link } from '@mui/material';
-import { Logout, Redeem } from "@mui/icons-material";
+import { CalendarMonth, Logout, Redeem } from "@mui/icons-material";
 import { Login } from "types/users/LoginType";
 
 export const ProvidersMenu = ({auth, userEmail, userMenu, handleUserMenu, handleClose, handleLogOut}: Login) => {
@@ -33,6 +33,9 @@ export const ProvidersMenu = ({auth, userEmail, userMenu, handleUserMenu, handle
                     </MenuItem>
                     <MenuItem onClick={handleClose}>
                         <Link href="/providers/services" underline="none" className="link primaryLink"><Redeem/> Mis servicios</Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <Link href="/providers/services" underline="none" className="link primaryLink"><CalendarMonth/> Mi agenda</Link>
                     </MenuItem>
                     <MenuItem onClick={handleLogOut} className="buttonsBox">
                         <Link underline="none" className="link primaryLink"><Logout/> Cerrar sesión</Link>

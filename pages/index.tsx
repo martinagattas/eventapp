@@ -1,4 +1,4 @@
-import { Hero } from "eventapp/components/home/Hero";
+import { ClientsHero } from "eventapp/components/home/ClientsHero";
 import { Layout } from "eventapp/components/layout/Layout";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
             </Head>
 
             <Layout variant="general">
-                {/* <Hero/> */}
+                {/* <ClientsHero/> */}
             </Layout>
         </>
     )

@@ -1,5 +1,5 @@
+import { ProvidersHero } from "eventapp/components/home/ProvidersHero";
 import { Layout } from "eventapp/components/layout/Layout";
-import { ProvidersLoginForm } from "eventapp/components/login/ProvidersLoginForm";
 import { NextPage } from "next";
 import Head from "next/head";
 
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
             </Head>
 
             <Layout variant="general">
-                <ProvidersLoginForm/>
+                <ProvidersHero/>
             </Layout>
         </>
     )

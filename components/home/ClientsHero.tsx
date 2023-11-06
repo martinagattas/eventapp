@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Box, Typography, Link } from '@mui/material';
 
-export const Hero:FC = () => {
+export const ClientsHero:FC = () => {
     return (
-        <main className="container">
+        <main className="container clientsHero">
             <Box>
                 <Typography variant="h1" mb={2}>ORGANIZA <br className="hideSm"/>TU EVENTO</Typography>
                 <Typography variant="body1" mb={2}><span className="bgWhite">La plataforma perfecta para la planificación y organización de tus eventos.</span></Typography>
