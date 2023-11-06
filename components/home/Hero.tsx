@@ -1,7 +1,7 @@
+import React, { FC } from "react";
 import { Box, Typography, Link } from '@mui/material';
-import * as React from 'react';
 
-export default function Header() {
+export const Hero:FC = () => {
     return (
         <main className="container">
             <Box>

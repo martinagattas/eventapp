@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { createUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 import { comparePassword, validateEmail, validatePasswordLength } from "utils/validations"
-import Toast from "../form-components/Toast"
+import { Toast } from "../form-components/Toast"
 import { ArrowBack } from "@mui/icons-material"
 import Image from "next/image"
 
