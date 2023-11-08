@@ -7,8 +7,9 @@ export type CustomInputType = {
     required?: boolean,
     control: Control<any>,
     placeholder?: string,
-    defaultValue?: string,
+    defaultValue?: any,
     error?: boolean,
     helperText?: string,
-    textFieldProps?: Record<string, any>
+    textFieldProps?: Record<string, any>,
+    className?: string
 }

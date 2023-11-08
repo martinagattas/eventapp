@@ -1,4 +1,4 @@
-main{
+.clientsHero{
     display: flex;
     align-items: center;
     background-image: url('../public/auth-background.png');
@@ -19,7 +19,7 @@ main{
 }
 
 @media screen and (min-width: 768px) {
-    main{
+    .clientsHero{
         height: calc(100vh - 9rem);
         & > div{
             width: 60vw;

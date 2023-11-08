@@ -1,9 +1,10 @@
+import React, { FC } from "react";
 import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { Box, List, ListItem, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import Image from 'next/image';
 
-export default function Footer() {
+export const Footer:FC = () => {
     return (
         <footer>
             <Box display={'flex'} alignItems={'center'} gap={1}>

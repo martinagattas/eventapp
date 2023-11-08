@@ -16,7 +16,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Toast({open, onClose, severity, message}: Props) {
+export const Toast = ({open, onClose, severity, message}: Props) => {
     return (
         <Snackbar open={open} onClose={onClose}>
             <Alert severity={severity} sx={{ width: '100%' }}>{message}</Alert>

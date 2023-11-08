@@ -5,8 +5,9 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { createUser } from "eventapp/services/users/users.service"
 import { useRouter } from "next/router"
 import { comparePassword, validateEmail, validatePasswordLength } from "utils/validations"
-import Toast from "../form-components/Toast"
+import { Toast } from "../form-components/Toast"
 import { ArrowBack } from "@mui/icons-material"
+import Image from "next/image"
 
 interface FormData {
     name: string;
@@ -24,7 +25,7 @@ const initialData = {
     confirmPassword: ''
 }
 
-export const RegisterForm: FC = () => {
+export const ClientsRegisterForm: FC = () => {
     const router = useRouter();
     const { control, handleSubmit } = useForm<FormData>();
 
@@ -93,10 +94,10 @@ export const RegisterForm: FC = () => {
         <Container className="authForm">
             <Toast open={credentialsError} onClose={handleCloseToast} severity="error" message={credentialsErrorMessage}/>
             <Box className="authImgBox hideXs">
-                <Link href="/" underline="none" className="whiteLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Image width={256} height={171} src={"/auth-background.png"} alt={"Registrarme"}/>
             </Box>
             <Box className="authFormBox">
-                <Link href="/" underline="none" className="grayLink hideSm" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
+                <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Registrarme</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
@@ -109,6 +110,7 @@ export const RegisterForm: FC = () => {
                                 defaultValue={initialData.name}
                                 placeholder="Ej: María"
                                 required={true}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -120,6 +122,7 @@ export const RegisterForm: FC = () => {
                                 defaultValue={initialData.surname}
                                 placeholder="Ej: Pérez"
                                 required={true}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -133,6 +136,7 @@ export const RegisterForm: FC = () => {
                                 required={true}
                                 error={emailError}
                                 helperText={emailErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -146,6 +150,7 @@ export const RegisterForm: FC = () => {
                                 required={true}
                                 error={pswError}
                                 helperText={pswErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -159,6 +164,7 @@ export const RegisterForm: FC = () => {
                                 required={true}
                                 error={confirmPswError}
                                 helperText={confirmPswErrorMessage}
+                                className="input"
                             />
                         </Grid>
                         <Grid item xs={12}>
