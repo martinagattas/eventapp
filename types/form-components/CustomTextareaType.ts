@@ -1,9 +1,8 @@
 import { Control } from 'react-hook-form';
 
-export type CustomInputType = {
+export type CustomTextareaType = {
     name: string,
     label: string,
-    type: string,
     required?: boolean,
     control: Control<any>,
     placeholder?: string,
@@ -11,6 +10,7 @@ export type CustomInputType = {
     error?: boolean,
     helperText?: string,
     textFieldProps?: Record<string, any>,
-    className?: string
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    className?: string,
+    rows?: number 
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }

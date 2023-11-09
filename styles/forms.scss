@@ -31,6 +31,39 @@ label.Mui-focused{
     }
 }
 
+.newServiceFormContainer {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+}
+
+.newServiceForm {
+    padding-right: 3rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    min-width: 25%; 
+    max-width: 25%; 
+    border: solid black;
+    overflow-y: auto;
+    max-height: 70%;
+}
+
+.preview {
+    text-align: justify;
+    max-width: 80%;
+    word-wrap: break-word;
+    padding-bottom: 2rem;
+}
+
+img.preview {
+    min-width: 70%;
+  }
+
 @media screen and (min-width: 768px){
     .authForm{
         display: flex;

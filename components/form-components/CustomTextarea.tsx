@@ -1,11 +1,10 @@
-import { Controller } from "react-hook-form"
-import { CustomInputType } from "types/form-components/CustomInputType"
-import TextField from '@mui/material/TextField'
+import { Controller } from "react-hook-form";
+import { CustomTextareaType } from "types/form-components/CustomTextareaType";
+import TextField from '@mui/material/TextField';
 
-export const CustomInput = ({
+export const CustomTextarea = ({
     name,
     label,
-    type,
     required,
     control,
     placeholder,
@@ -14,9 +13,10 @@ export const CustomInput = ({
     helperText,
     textFieldProps,
     className,
+    rows, 
     onChange,
-}: CustomInputType) => {
-    return(
+}: CustomTextareaType) => {
+    return (
         <Controller
             name={name}
             control={control}
@@ -25,18 +25,19 @@ export const CustomInput = ({
                 <TextField
                     variant="outlined"
                     fullWidth
+                    multiline
                     {...field}
                     label={label}
-                    type={type}
                     required={required}
                     placeholder={placeholder}
                     error={error}
                     helperText={helperText}
                     {...textFieldProps}
-                    className={className}
+                    className={className} 
+                    rows={rows} 
                     onChange={onChange}
                 />
             )}
         />
-    )
-}
+    );
+};

@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { Box, Button, Container, Grid, Link, Typography, MenuItem, SelectChangeEvent } from "@mui/material"
 import { ArrowBack } from "@mui/icons-material"
 import { CustomInput } from "../form-components/CustomInput"
+import { CustomTextarea } from "../form-components/CustomTextarea"
 import { validateTitleLength, validateShortDescriptionLength, validateLongDescriptionLength, validatePrice } from "utils/validations"
 import { CustomSelect } from "../form-components/CustomSelect"
 
@@ -10,7 +11,7 @@ interface FormData {
     title: string;
     shortDescription: string;
     longDescription: string;
-    image: File;
+    image: null;
     currency: string;
     price: number;
 }
@@ -44,7 +45,7 @@ export const NewServiceForm: FC = () => {
         const titleValidation = validateTitleLength(formData.title);
         const shortDescValidation = validateShortDescriptionLength(formData.shortDescription);
         const longDescValidation = validateLongDescriptionLength(formData.longDescription);
-        const priceValidation = validatePrice(formData.price.toString());
+        const priceValidation = validatePrice(formData.price);
 
         setTitleError(titleValidation !== undefined);
         setTitleErrorMessage(titleValidation);
@@ -86,9 +87,7 @@ export const NewServiceForm: FC = () => {
 
     const [currency, setCurrency] = useState<string>('');
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setCurrency(event.target.value);
-    };
+    const [selectedCurrency, setSelectedCurrency] = useState<string>('');
 
     const currencyOptions = [
         { value: 'ARS', label: 'PESO ARGENTINO' },
@@ -99,9 +98,35 @@ export const NewServiceForm: FC = () => {
         { value: '€', label: 'EURO' },
     ];
 
+    const [formData, setFormData] = useState<FormData>(initialData);
+
+    const handleInputChange = (name: keyof FormData, value: string) => {
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                if (event.target && typeof event.target.result === 'string') {
+                    setImagePreview(event.target.result);
+                }
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    };
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setCurrency(event.target.value);
+        setSelectedCurrency(event.target.value); 
+    };
+
     return (
-        <Container className="additionalForm">
-            <Box className="additionalFormBox">
+        <Container className="newServiceFormContainer">
+            <Box className="newServiceForm">
                 <Link href="/" underline="none" className="grayLink" mt={2} mb={2} display={"flex"}><ArrowBack/></Link>
                 <Typography variant="h4" mt={2} mb={4} className="colorGray">Añadir nuevo servicio</Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
@@ -112,40 +137,40 @@ export const NewServiceForm: FC = () => {
                                 name="title"
                                 label="Título"
                                 control={control}
-                                defaultValue={initialData.title}
                                 placeholder="Ej: Producto A"
                                 required={true}
                                 error={titleError}
                                 helperText={titleErrorMessage}
                                 className="input"
+                                onChange={(e) => handleInputChange("title", e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <CustomInput
-                                type="text"
+                            <CustomTextarea
                                 name="shortDescription"
                                 label="Descripción Corta"
                                 control={control}
-                                defaultValue={initialData.shortDescription}
                                 placeholder="Descripción corta del producto"
                                 required={true}
                                 error={shortDescError}
                                 helperText={shortDescErrorMessage}
-                                className="input"
+                                className="input"  
+                                rows={2}
+                                onChange={(e) => handleInputChange("shortDescription", e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <CustomInput
-                                type="text"
+                            <CustomTextarea
                                 name="longDescription"
                                 label="Descripción Larga"
                                 control={control}
-                                defaultValue={initialData.longDescription}
-                                placeholder="Ej: Descripción larga del producto"
+                                placeholder="Descripción larga del producto"
                                 required={true}
                                 error={longDescError}
                                 helperText={longDescMessage}
                                 className="input"
+                                rows={4}
+                                onChange={(e) => handleInputChange("longDescription", e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -157,21 +182,12 @@ export const NewServiceForm: FC = () => {
                                         <input
                                             type="file"
                                             onChange={(e) => {
-                                                if (e.target.files && e.target.files[0]) {
-                                                    const reader = new FileReader();
-                                                    reader.onload = (event) => {
-                                                        if (event.target && typeof event.target.result === 'string') {
-                                                            setImagePreview(event.target.result);
-                                                        }
-                                                    };
-                                                    reader.readAsDataURL(e.target.files[0]);
-                                                    field.onChange(e.target.files[0]);
-                                                }
+                                                handleImageChange(e); 
+                                                field.onChange(e.target.files[0]);
                                             }}
                                             accept="image/*"
                                         />
                                         {imagePreview && (
-                                            // eslint-disable-next-line @next/next/no-img-element
                                             <img
                                                 src={imagePreview}
                                                 alt="Vista previa de la imagen"
@@ -187,7 +203,6 @@ export const NewServiceForm: FC = () => {
                                 name="currency"
                                 label="Moneda"
                                 control={control}
-                                defaultValue={initialData.currency}
                                 value={currency}
                                 required={true}
                                 onChange={handleChange}
@@ -207,13 +222,12 @@ export const NewServiceForm: FC = () => {
                                 name="price"
                                 label="Precio"
                                 control={control}
-                                defaultValue={initialData.price.toString()}
                                 placeholder="Ej: 100"
                                 required={true}
-                                // inputProps={{ inputMode: "numeric" }}
                                 error={priceError}
                                 helperText={priceErrorMessage}
                                 className="input"
+                                onChange={(e) => handleInputChange("price", e.target.value)}
                             />
                         </Grid>
                     </Grid>
@@ -222,6 +236,16 @@ export const NewServiceForm: FC = () => {
                     </Grid>
                 </Box>
             </Box>
+            <div className="card">
+                <Typography className="preview" variant="h6">{formData.title || 'Aquí viene el título'}</Typography>
+                {imagePreview 
+                    ? <img src={imagePreview} alt="Vista previa" style={{ maxWidth: '100px' }} className="preview"/>
+                    : <img src="\iso_positive.png" alt="Imagen Genérica" style={{ maxWidth: '100px' }} className="preview" />
+                }
+                <Typography className="preview" variant="body1">{formData.shortDescription || 'Aquí viene la descripción corta'}</Typography>
+                <Typography className="preview" variant="body1">{formData.longDescription || 'Aquí viene la descripción larga'}</Typography>
+                <Typography className="preview" variant="body1">{selectedCurrency} {formData.price || 'Aquí viene el precio'}</Typography>
+            </div>
         </Container>
     );
 }
