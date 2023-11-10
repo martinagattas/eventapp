@@ -4,12 +4,11 @@ import { Box, Button, Container, Grid, Link, Typography, MenuItem, SelectChangeE
 import { ArrowBack } from "@mui/icons-material"
 import { CustomInput } from "../form-components/CustomInput"
 import { CustomTextarea } from "../form-components/CustomTextarea"
-import { validateTitleLength, validateShortDescriptionLength, validateLongDescriptionLength, validatePrice } from "utils/validations"
+import { validateLongDescriptionLength, validatePrice } from "utils/validations"
 import { CustomSelect } from "../form-components/CustomSelect"
 
 interface FormData {
-    title: string;
-    shortDescription: string;
+    serviceType: string;
     longDescription: string;
     image: null;
     currency: string;
@@ -17,8 +16,7 @@ interface FormData {
 }
 
 const initialData = {
-    title: '',
-    shortDescription: '',
+    serviceType: '',
     longDescription: '',
     image: null,
     currency: '',
@@ -26,12 +24,6 @@ const initialData = {
 }
 
 export const NewServiceForm: FC = () => {
-
-    const [titleError, setTitleError] = useState<boolean>(false);
-    const [titleErrorMessage, setTitleErrorMessage] = useState<string | undefined>(undefined);
-
-    const [shortDescError, setShortDescError] = useState<boolean>(false);
-    const [shortDescErrorMessage, setShortDescErrorMessage] = useState<string | undefined>(undefined);
 
     const [longDescError, setLongDescError] = useState<boolean>(false);
     const [longDescMessage, setLongDescErrorMessage] = useState<string | undefined>(undefined);
@@ -42,31 +34,13 @@ export const NewServiceForm: FC = () => {
 
     const onSubmit: SubmitHandler<FormData> = async (formData) => {
 
-        const titleValidation = validateTitleLength(formData.title);
-        const shortDescValidation = validateShortDescriptionLength(formData.shortDescription);
         const longDescValidation = validateLongDescriptionLength(formData.longDescription);
         const priceValidation = validatePrice(formData.price);
 
-        setTitleError(titleValidation !== undefined);
-        setTitleErrorMessage(titleValidation);
-        setShortDescError(shortDescValidation !== undefined);
-        setShortDescErrorMessage(shortDescValidation);
         setLongDescError(longDescValidation !== undefined);
         setLongDescErrorMessage(longDescValidation);
         setPriceError(priceValidation !== undefined);
         setPriceErrorMessage(priceValidation);
-
-        if (titleValidation) {
-            setTitleError(true);
-            setTitleErrorMessage(titleValidation);
-            return;
-        }
-
-        if (shortDescValidation) {
-            setShortDescError(true);
-            setShortDescErrorMessage(shortDescValidation);
-            return;
-        }
 
         if (longDescValidation) {
             setLongDescError(true);
@@ -83,11 +57,34 @@ export const NewServiceForm: FC = () => {
 
     const { control, handleSubmit } = useForm<FormData>();
 
+    const [selectedServiceType, setSelectedServiceType] = useState<string>('');
+
+    const getServiceTypeLabel = (value: string) => {
+        const option = serviceTypeOptions.find(option => option.value === value);
+        return option ? option.label : value;
+    };
+
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     const [currency, setCurrency] = useState<string>('');
 
     const [selectedCurrency, setSelectedCurrency] = useState<string>('');
+
+    const serviceTypeOptions = [
+        { value: "photography", label: "FOTOGRAFÍA" },
+        { value: "food", label: "CATERING" },
+        { value: "website", label: "PÁGINA WEB" },
+        { value: "video", label: "VIDEO" },
+        { value: "music", label: "MÚSICA" },
+        { value: "lights", label: "ILUMINACIÓN" },
+        { value: "decoration", label: "DECORACIÓN" },
+        { value: "flowers", label: "FLORERÍA" },
+        { value: "invitation", label: "DISEÑO DE INVITACIONES" },
+        { value: "place", label: "ALQUILER DE ESPACIOS" },
+        { value: "tent", label: "ALQUILER DE CARPAS" },
+        { value: "car", label: "ALQUILER DE AUTOS" },
+        { value: "living", label: "ALQUILER DE LIVINGS" },
+    ]
 
     const currencyOptions = [
         { value: 'ARS', label: 'PESO ARGENTINO' },
@@ -132,39 +129,29 @@ export const NewServiceForm: FC = () => {
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} mb={2}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <CustomInput
-                                type="text"
-                                name="title"
-                                label="Título"
+                        <CustomSelect
+                                name="serviceType"
+                                label="Tipo de servicio"
                                 control={control}
-                                placeholder="Ej: Producto A"
+                                value={selectedServiceType}
                                 required={true}
-                                error={titleError}
-                                helperText={titleErrorMessage}
-                                className="input"
-                                onChange={(e) => handleInputChange("title", e.target.value)}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <CustomTextarea
-                                name="shortDescription"
-                                label="Descripción Corta"
-                                control={control}
-                                placeholder="Descripción corta del producto"
-                                required={true}
-                                error={shortDescError}
-                                helperText={shortDescErrorMessage}
-                                className="input"  
-                                rows={2}
-                                onChange={(e) => handleInputChange("shortDescription", e.target.value)}
-                            />
+                                onChange={(e) => setSelectedServiceType(e.target.value)}
+                                className="select"
+                            >
+                                <MenuItem value="" disabled />
+                                {serviceTypeOptions.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                                ))}
+                            </CustomSelect>
                         </Grid>
                         <Grid item xs={12}>
                             <CustomTextarea
                                 name="longDescription"
-                                label="Descripción Larga"
+                                label="Descripción"
                                 control={control}
-                                placeholder="Descripción larga del producto"
+                                placeholder="Descripción del producto"
                                 required={true}
                                 error={longDescError}
                                 helperText={longDescMessage}
@@ -237,14 +224,13 @@ export const NewServiceForm: FC = () => {
                 </Box>
             </Box>
             <div className="card">
-                <Typography className="preview" variant="h6">{formData.title || 'Aquí viene el título'}</Typography>
+                <Typography className="preview" variant="h6">{getServiceTypeLabel(selectedServiceType) || 'Aquí viene el tipo de servicio'}</Typography>
                 {imagePreview 
                     ? <img src={imagePreview} alt="Vista previa" style={{ maxWidth: '100px' }} className="preview"/>
                     : <img src="\iso_positive.png" alt="Imagen Genérica" style={{ maxWidth: '100px' }} className="preview" />
                 }
-                <Typography className="preview" variant="body1">{formData.shortDescription || 'Aquí viene la descripción corta'}</Typography>
-                <Typography className="preview" variant="body1">{formData.longDescription || 'Aquí viene la descripción larga'}</Typography>
-                <Typography className="preview" variant="body1">{selectedCurrency} {formData.price || 'Aquí viene el precio'}</Typography>
+                <Typography className="preview" variant="body1">{formData.longDescription || 'Aquí viene la descripción del producto'}</Typography>
+                <Typography className="preview" variant="h5">{selectedCurrency} {formData.price || 'Aquí viene el precio'}</Typography>
             </div>
         </Container>
     );

@@ -19,25 +19,25 @@ export const comparePassword = (password: string, confirmPassword: string): stri
     return undefined;
 }
 
-export const validateTitleLength = (title: string): string | undefined => {
-    if (!title || title.length < 5) {
-        return 'El título debe tener al menos 5 caracteres';
-    }
-    return undefined;
-}
+// export const validateTitleLength = (title: string): string | undefined => {
+//     if (!title || title.length < 5) {
+//         return 'El título debe tener al menos 5 caracteres';
+//     }
+//     return undefined;
+// }
 
-export const validateShortDescriptionLength = (shortDescription: string): string | undefined => {
-    if (!shortDescription) {
-        return 'La descripción corta no puede estar vacía';
-    }
+// export const validateShortDescriptionLength = (shortDescription: string): string | undefined => {
+//     if (!shortDescription) {
+//         return 'La descripción corta no puede estar vacía';
+//     }
 
-    const wordCount = shortDescription.split(" ").length -1;
-    if (wordCount < 2 || wordCount > 30) {
-        return 'La descripción corta debe tener más de 1 palabra y 30 palabras o menos.';
-    }
+//     const wordCount = shortDescription.split(" ").length -1;
+//     if (wordCount < 2 || wordCount > 30) {
+//         return 'La descripción corta debe tener más de 1 palabra y 30 palabras o menos.';
+//     }
 
-    return undefined;
-}
+//     return undefined;
+// }
 
 export const validateLongDescriptionLength = (longDescription: string): string | undefined => {
     
@@ -55,7 +55,7 @@ export const validateLongDescriptionLength = (longDescription: string): string |
 export const validatePrice = (price: string): string | undefined => {
 
     if (!price) {
-        return 'El precio no puede estar vacía';
+        return 'El precio no puede estar vacío';
     }
 
     const numericPrice = parseFloat(price);
