@@ -4,8 +4,8 @@ export type UserT = {
   id: number,
   type: 'client' | 'provider',
   avatar?: string,
-  firstname: string,
-  lastname: string,
+  firstName: string,
+  lastName: string,
   email?: string
 }
 

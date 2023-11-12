@@ -1,0 +1,8 @@
+.container{
+  max-width: var(--max-width);
+}
+
+.general .sub-container{
+  padding: 4rem 1rem 1rem;
+  margin: 0;
+}

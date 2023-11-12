@@ -1,3 +1,4 @@
+import { Layout } from 'eventapp/components/layout/Layout';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -19,7 +20,9 @@ const Home: NextPage = () => {
         ></meta>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>App acá</h1>
+      <Layout variant='general'>
+        <h1>hola</h1>
+      </Layout>
     </>
   )
 }
