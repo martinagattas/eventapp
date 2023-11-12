@@ -1,4 +1,4 @@
-import { CategoryT } from 'types/categories/Category.types';
+import { CategoriesT } from 'types/categories/Category.types';
 
 export type UserT = {
   id: number,
@@ -19,8 +19,8 @@ export interface UserProviderI extends UserT {
   province: string,
   shortDescription: string,
   description?: string,
-  categories?: CategoryT[],
+  categories?: CategoriesT[],
   defaultImage: string,
   gallery?: string[],
-  rating: number
+  rating?: number
 }
