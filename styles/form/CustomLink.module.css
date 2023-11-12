@@ -1,9 +1,13 @@
-.link{
+.link, .button{
   display: flex;
   align-items: center;
   gap: .5rem;
-  font-weight: bold;
-  letter-spacing: .1rem;
+  letter-spacing: .05rem;
+}
+
+.link svg, .button svg, .button-outline svg{
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .primary{
@@ -39,21 +43,16 @@
 }
 
 .button{
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: .5rem;
   color: var(--color-white);
   border-radius: 2rem;
-  border: .2rem solid;
+  border: .1rem solid;
   padding: 0.4rem 0.8rem;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
 }
 
 .button-primary{
   background-color: var(--color-primary);
-  border: 0.2rem solid var(--color-primary);
+  border: .1rem solid var(--color-primary);
 }
 
 .button-primary:hover{
@@ -63,8 +62,7 @@
 .button-outline{
   text-align: center;
   padding: .4rem .8rem;
-  border: .2rem solid;
+  border: .1rem solid;
   border-radius: 2rem;
-  font-weight: bold;
-  letter-spacing: .1rem;
+  letter-spacing: .05rem;
 }
