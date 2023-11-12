@@ -1,0 +1,28 @@
+.container{
+  background-color: var(--color-white);
+}
+
+.sub-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.navbar-logo{
+  width: 10rem;
+  height: auto;
+}
+
+.button-group{
+  display: none;
+}
+
+@media screen and (min-width: 960px){
+  .button-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
