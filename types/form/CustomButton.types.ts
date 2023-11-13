@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
 export interface CustomButtonI extends PropsWithChildren {
+  className?: string,
   variant: 'text' | 'contained' | 'outlined',
   customColor: 'primary' | 'secondary' | 'white' | 'gray',
   type?: 'submit' | 'button' | 'reset' | undefined,

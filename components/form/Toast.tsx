@@ -11,9 +11,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   }
 )
 
-export const Toast = ({open, onClose, severity, message}: ToastT) => {
+export const Toast = ({className, open, onClose, severity, message}: ToastT) => {
   return (
-    <Snackbar open={open} onClose={onClose}>
+    <Snackbar open={open} onClose={onClose} className={className}>
       <Alert severity={severity} sx={{ width: '100%' }}>{message}</Alert>
     </Snackbar>
   )
