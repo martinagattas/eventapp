@@ -1,8 +1,4 @@
-.container{
+.container.navigation{
+  margin-top: 4.5rem;
   max-width: var(--max-width);
-}
-
-.general .sub-container{
-  padding: 6rem 1rem 1rem;
-  margin: 0;
 }

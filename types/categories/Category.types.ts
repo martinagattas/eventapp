@@ -13,11 +13,16 @@ export type CategoriesT = 'photography'
   | 'livings';
 
 export type CategoryT = {
-  id: string,
+  id: number,
   type: CategoriesT,
   description?: string,
+  defaultImage?: string,
+}
+
+export type ProviderCategoryT = {
+  id: number,
+  category: CategoryT,
   currency?: string,
   price?: number,
-  defaultImage?: string,
   gallery?: string[]
 }

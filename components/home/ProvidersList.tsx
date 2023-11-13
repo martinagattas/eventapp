@@ -3,7 +3,8 @@ import { CustomSlider } from '../slider/Slider';
 import { SliderCard } from '../slider/SliderCard';
 import { UserProviderI } from 'types/users/User.types';
 import { CustomTitle } from '../layout/CustomTitle';
-// import s from '../../styles/home/ProvidersList.module.css';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Section } from '../layout/Section';
 
 // fixMe: traer listado de proveedores de services
 const providers: UserProviderI[] = [{
@@ -22,10 +23,16 @@ const providers: UserProviderI[] = [{
 }];
 
 export const ProvidersList:FC = () => {
+  const xs = useMediaQuery('(max-width:600px)');
+  const sm = useMediaQuery('(max-width:960px)');
+  const md = useMediaQuery('(max-width:1280px)');
+
+  const cardsToShow = xs ? 1 : (sm ? 2 : (md ? 3 : 4));
+
   return (
-    <>
+    <Section variant="contained">
       <CustomTitle color="primary" htmlTag="h2" text="Listado de proveedores"/>
-      <CustomSlider totalCards={providers.length}>
+      <CustomSlider variant="cards" totalCards={providers.length} cardsToShow={cardsToShow}>
         {providers.map((provider) => (
           <SliderCard
             key={provider.id}
@@ -52,6 +59,6 @@ export const ProvidersList:FC = () => {
           />
         ))}
       </CustomSlider>
-    </>
+    </Section>
   )
 }

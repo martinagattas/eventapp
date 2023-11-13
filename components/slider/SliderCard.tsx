@@ -16,7 +16,7 @@ import { CustomLink } from '../form/CustomLink';
 
 export interface SliderCardI {
   className?: string,
-  avatar: {
+  avatar?: {
     ariaLabel: string,
     imgSrc: string,
     imgAlt: string
@@ -29,20 +29,21 @@ export interface SliderCardI {
   }
   description: string | ReactNode,
   extraDescription?: string | ReactNode,
+  favButtons?: boolean,
   link?: {
     element: CustomLinkI,
     text: string | ReactNode
   }
 }
 
-export const SliderCard:FC<SliderCardI> = ({ className, avatar, title, subheader, cardImg, description, extraDescription, link }) => {
+export const SliderCard:FC<SliderCardI> = ({ className, avatar, title, subheader, cardImg, description, extraDescription, favButtons = true, link }) => {
   const containerClass = `${s['slider-card']} ${className}`;
 
   return (
     <Card className={containerClass}>
       <CardHeader
         className={s['slider-card-header']}
-        avatar={
+        avatar={avatar && 
           <Avatar aria-label={avatar?.ariaLabel}>
             <Image src={avatar?.imgSrc || ''} alt={avatar?.imgAlt || ''} width={40} height={40} />
           </Avatar>
@@ -62,12 +63,14 @@ export const SliderCard:FC<SliderCardI> = ({ className, avatar, title, subheader
       </CardContent>
       <CardActions disableSpacing className={s['slider-card-actions']}>
         <div>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          {favButtons && <>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </>}
         </div>
         {link && <CustomLink customVariant={link.element.customVariant} customColor={link.element.customColor} href={link.element.href} underline='none'>{link.text}</CustomLink>}
       </CardActions>

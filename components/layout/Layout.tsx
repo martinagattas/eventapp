@@ -1,5 +1,4 @@
 import React, { FC, PropsWithChildren } from 'react';
-import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { Navbar } from '../nav/Navbar';
 import s from '../../styles/layout/Layout.module.css';
@@ -7,7 +6,7 @@ import { UserT } from 'types/users/User.types';
 
 interface LayoutI extends PropsWithChildren {
   className?: string,
-  variant: 'general' | 'auth'
+  variant: 'navigation' | 'full'
 }
 
 // fixMe: ver de dónde saco estas credenciales para saber quién es el user si está loggeado (auth = true)
@@ -25,11 +24,9 @@ export const Layout: FC<LayoutI> = ({ className, variant, children }) => {
 
   return (
     <Stack className={containerClass}>
-      {variant === 'general' && <Navbar auth={auth} user={fakeUser} />}
-      <Container className={s['sub-container']}>
-        {children}
-      </Container>
-      {/* {variant === 'general' && <Footer />} */}
+      {variant === 'navigation' && <Navbar auth={auth} user={fakeUser} />}
+      {children}
+      {/* {variant === 'navigation' && <Footer />} */}
     </Stack>
   )
 }
