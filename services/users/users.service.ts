@@ -1,12 +1,13 @@
 import { LoginType, RegisterType } from "types/users/UserType";
 
-const baseUrl = 'https://virtserver.swaggerhub.com/BXPLAYER10/Proyecto-Final-Integrador/1.0.0';
+
+const baseUrl = "http://localhost:8090/auth"
 
 // fixMe: falta cambiar el endpoint para el login y agregar los mensajes de users.error dependiendo del código que recibo del back
 
 export const loginUser = async (data: LoginType): Promise<any> => {
     const userData = JSON.stringify(data);
-    const response = await fetch(`${baseUrl}/users`, {
+    const response = await fetch(`${baseUrl}/login`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -24,8 +25,12 @@ export const logOut = async () => {
 }
 
 export const createUser = async (data: RegisterType): Promise<any> => {
+    data['username'] = data['email'];
+    data['type'] = 'USER';
     const userData = JSON.stringify(data);
-    const response = await fetch(`${baseUrl}/users`, {
+    console.log(userData)
+
+    const response = await fetch(`${baseUrl}/register`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

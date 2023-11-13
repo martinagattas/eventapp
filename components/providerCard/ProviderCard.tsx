@@ -7,16 +7,18 @@ import { Button } from '@mui/material';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 interface ProviderCardProps {
-  title: string;
+  name: string;
   images: string[]; // Array of image URLs
   rating: number;
   location: string;
   promotions: string;
   price: string;
+  category : string;
 }
 
 const ProviderCard: React.FC<ProviderCardProps> = ({
-  title,
+  name,
+  category,
   images,
   rating,
   location,
@@ -41,22 +43,25 @@ const ProviderCard: React.FC<ProviderCardProps> = ({
       </Carousel>
       <CardContent>
         <Typography variant='h6' component='div'>
-          {title}
+          {name}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
-          {rating} ({rating} opiniones)
+          <b>{category}</b>
         </Typography>
+        {/* <br/>
         <Typography variant='body2' color='text.secondary'>
           {location}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
           {promotions}
-        </Typography>
+        </Typography> */}
+        <br/>
         <Typography variant='body2' color='text.secondary'>
-          Desde {price}
+          Desde: $ {price}
         </Typography>
+        <br/>
         <Button variant='outlined' color='success' fullWidth>
-          Solicitar Presupuesto
+          Ver proveedores
         </Button>
       </CardContent>
     </Card>

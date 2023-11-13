@@ -10,12 +10,15 @@ import { ArrowBack } from "@mui/icons-material"
 import Image from "next/image"
 
 interface FormData {
-    name: string;
-    surname: string;
+    username: string;
+    firstname: string;
+    lastname: string;
     email: string;
     password: string;
     confirmPassword: string;
+    type: string;
 }
+
 
 const initialData = {
     name: '',
@@ -74,7 +77,7 @@ export const ClientsRegisterForm: FC = () => {
             setConfirmPswErrorMessage(passwordComparation);
             return;
         }
-
+        
         const response = await createUser(formData);
 
         try{
@@ -104,7 +107,7 @@ export const ClientsRegisterForm: FC = () => {
                         <Grid item xs={12}>
                             <CustomInput
                                 type="text"
-                                name="name"
+                                name="firstname"
                                 label="Nombre"
                                 control={control}
                                 defaultValue={initialData.name}
@@ -116,7 +119,7 @@ export const ClientsRegisterForm: FC = () => {
                         <Grid item xs={12}>
                             <CustomInput
                                 type="text"
-                                name="surname"
+                                name="lastname"
                                 label="Apellido"
                                 control={control}
                                 defaultValue={initialData.surname}

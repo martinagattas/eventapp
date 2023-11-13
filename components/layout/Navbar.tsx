@@ -11,6 +11,7 @@ import { ProvidersMenu } from "../navBar/ProvidersMenu";
 import { ClientsLinks } from "../navBar/ClientsLinks";
 import { ProvidersLinks } from "../navBar/ProvidersLinks";
 
+
 export const Navbar:FC = () => {
     const router = useRouter();
     const isProvider = router.pathname === '/providers';
@@ -47,6 +48,7 @@ export const Navbar:FC = () => {
         logOut();
         setUserEmail('')
         setAuth(false);
+        router.push('/'); 
     }
 
     return (

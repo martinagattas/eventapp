@@ -2,8 +2,9 @@ import { ProvidersHero } from "eventapp/components/home/ProvidersHero";
 import { Layout } from "eventapp/components/layout/Layout";
 import { NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 
-const Home: NextPage = () => {
+const Home: NextPage = () => {    
     return(
         <>
             <Head>

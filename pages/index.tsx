@@ -2,32 +2,32 @@ import { ClientsHero } from 'eventapp/components/home/ClientsHero';
 import { Layout } from 'eventapp/components/layout/Layout';
 import Main from 'eventapp/components/main/Main';
 import ProviderList from 'eventapp/components/providerList/ProviderList';
+import { getAllProviders } from 'eventapp/services/providers/providers.service';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
-  const providers = [
-    {
-      title: 'Proveedor 1',
-      imageSrc: 'url',
-      description: 'Descripción del proveedor 1',
-    },
-    {
-      title: 'Proveedor 2',
-      imageSrc: 'url',
-      description: 'Descripción del proveedor 2',
-    },
-    {
-      title: 'Proveedor 3',
-      imageSrc: 'url',
-      description: 'Descripción del proveedor 1',
-    },
-    {
-      title: 'Proveedor 4',
-      imageSrc: 'url',
-      description: 'Descripción del proveedor 2',
-    },
-  ];
+
+  const [providers, setProviders] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {        
+        const providersData = await getAllProviders();
+
+        console.log(providersData)
+        // Actualiza el estado con los datos obtenidos
+        setProviders(providersData);
+      } catch (error) {
+        console.error('Error al obtener proveedores:', error);
+      }
+    };
+
+    // Llama a la función fetchData al montar el componente
+    fetchData();
+  }, []); // E
+
   return (
     <>
       <Head>

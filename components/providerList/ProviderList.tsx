@@ -4,9 +4,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 interface Provider {
-  title: string;
-  imageSrc: string;
-  description: string;
+  name: string;
+  category: {
+    name : string
+  };
+  imageSrc?: string;
+  information?: string;
+  price: Number;
 }
 
 interface ProviderListProps {
@@ -20,9 +24,11 @@ const ProviderList: React.FC<ProviderListProps> = ({ providers }) => {
         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
           <Box m={2}>
             <ProviderCard
-              title={provider.title}
-              imageSrc={provider.imageSrc}
-              description={provider.description}
+              name={provider.name}
+              category={provider.category?.name}
+              price={provider.price}
+              imageSrc={provider.imageSrc || "https://leekduck.com/assets/img/events/events-default.jpg" }
+              description={provider.information}
             />
           </Box>
         </Grid>

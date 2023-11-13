@@ -36,7 +36,7 @@ export const validateShortDescriptionLength = (shortDescription: string): string
 
 export const validateLongDescriptionLength = (longDescription: string): string | undefined => {
     const wordCount = longDescription.split(/\s+/).length;
-    if ( wordCount < 30 || wordCount > 100) {
+    if (wordCount < 10 || wordCount > 20) {
         return 'La descripción larga debe tener más de 30 palabras y 100 palabras o menos.';
     }
     return undefined;
