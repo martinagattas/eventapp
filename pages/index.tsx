@@ -1,3 +1,5 @@
+import { CategoriesList } from 'eventapp/components/home/CategoriesList';
+import { Hero } from 'eventapp/components/home/Hero';
 import { ProvidersList } from 'eventapp/components/home/ProvidersList';
 import { Layout } from 'eventapp/components/layout/Layout';
 import { NextPage } from 'next';
@@ -21,8 +23,10 @@ const Home: NextPage = () => {
         ></meta>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Layout variant='general'>
+      <Layout variant='navigation'>
+        <Hero/>
         <ProvidersList/>
+        <CategoriesList/>
       </Layout>
     </>
   )
