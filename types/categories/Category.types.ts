@@ -22,7 +22,9 @@ export type CategoryT = {
 export type ProviderCategoryT = {
   id: number,
   category: CategoryT,
+  description?: string,
   currency?: string,
   price?: number,
-  gallery?: string[]
+  gallery?: string[],
+  user_id: number
 }

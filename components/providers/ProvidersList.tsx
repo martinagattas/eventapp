@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { CustomSlider } from '../slider/Slider';
 import { UserProviderI } from 'types/users/User.types';
 import { CustomTitle, CustomTitleI } from '../layout/CustomTitle';
@@ -6,22 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Section } from '../layout/Section';
 import { ProvidersCard } from './ProvidersCard';
 import Grid from '@mui/material/Grid';
-
-// fixMe: traer listado de proveedores de services
-const providers: UserProviderI[] = [{
-  id: 1,
-  type: 'provider',
-  avatar: '/users/avatar.png',
-  firstName: 'María',
-  lastName: 'Pérez',
-  email: 'maria@perez.com',
-  country: 'Argentina',
-  province: 'Mendoza',
-  shortDescription: 'La mejor fotógrafa del mundo',
-  description: 'Más de 1.000 casamientos al mes',
-  categories: ['photography', 'food'],
-  defaultImage: '/categories/photography.png'
-}];
+import { getProviders } from 'eventapp/services/providers/providers.service';
 
 interface ProvidersListI {
   title?: CustomTitleI,
@@ -30,6 +15,20 @@ interface ProvidersListI {
 
 export const ProvidersList:FC<ProvidersListI> = ({ title, listVariant = 'slider' }) => {
   const { color = 'primary', htmlTag = 'h2', text } = {...title};
+
+  const [providers, setProviders] = useState<UserProviderI[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {        
+        const providersData = await getProviders();
+        setProviders(providersData);
+      } catch (error) {
+        console.error('Error al obtener proveedores:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const xs = useMediaQuery('(max-width:600px)');
   const sm = useMediaQuery('(max-width:960px)');

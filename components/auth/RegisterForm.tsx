@@ -12,18 +12,12 @@ import { CustomInput } from '../form/CustomInput';
 import { CustomButton } from '../form/CustomButton';
 import { CustomTitle } from '../layout/CustomTitle';
 import s from '../../styles/auth/RegisterForm.module.css';
-
-interface RegisterFormI {
-  name: string,
-  surname: string,
-  email: string,
-  password: string,
-  confirmPassword: string
-}
+import { RegisterFormT } from 'types/auth/RegisterForm.types';
+import { createUser } from 'eventapp/services/auth/auth.service';
 
 const initialData = {
-  name: '',
-  surname: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
   confirmPassword: ''
@@ -31,7 +25,7 @@ const initialData = {
 
 export const RegisterForm: FC = () => {
   const router = useRouter();
-  const { control, handleSubmit } = useForm<RegisterFormI>();
+  const { control, handleSubmit } = useForm<RegisterFormT>();
 
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | undefined>(undefined);
@@ -49,7 +43,7 @@ export const RegisterForm: FC = () => {
     setCredentialsError(false);
   };
 
-  const onSubmit: SubmitHandler<RegisterFormI> = async (formData) => {
+  const onSubmit: SubmitHandler<RegisterFormT> = async (formData) => {
     const emailValidation = validateEmail(formData.email);
     const passwordValidation = validatePasswordLength(formData.password);
     const passwordComparation = comparePassword(formData.password, formData.confirmPassword);
@@ -79,20 +73,19 @@ export const RegisterForm: FC = () => {
       return;
     }
 
-    // fixMe: agregar register service
-    // const response = await createUser(formData);
+    const response = await createUser(formData);
 
-    // try{
-    //   if(!response.error){
-    //     router.push('/');
-    //   } else{
-    //     setCredentialsError(true);
-    //     setCredentialsErrorMessage(`${response.error}: ${response.message}`);
-    //   }
-    // } catch(error: any){
-    //   setCredentialsError(true);
-    //   setCredentialsErrorMessage(`${response.error}: ${response.message}`);
-    // }
+    try{
+      if(!response.error){
+        router.push('/');
+      } else{
+        setCredentialsError(true);
+        setCredentialsErrorMessage(`${response.error}: ${response.message}`);
+      }
+    } catch(error: any){
+      setCredentialsError(true);
+      setCredentialsErrorMessage(`${response.error}: ${response.message}`);
+    }
   };
 
   return(
@@ -106,10 +99,10 @@ export const RegisterForm: FC = () => {
             <Grid item xs={12}>
               <CustomInput
                 type="text"
-                name="name"
+                name="firstname"
                 label="Nombre"
                 control={control}
-                defaultValue={initialData.name}
+                defaultValue={initialData.firstname}
                 placeholder="Ej: María"
                 required={true}
               />
@@ -117,10 +110,10 @@ export const RegisterForm: FC = () => {
             <Grid item xs={12}>
               <CustomInput
                 type="text"
-                name="surname"
+                name="lastname"
                 label="Apellido"
                 control={control}
-                defaultValue={initialData.surname}
+                defaultValue={initialData.lastname}
                 placeholder="Ej: Pérez"
                 required={true}
               />

@@ -12,11 +12,8 @@ import { CustomInput } from '../form/CustomInput';
 import { CustomButton } from '../form/CustomButton';
 import { CustomTitle } from '../layout/CustomTitle';
 import s from '../../styles/auth/LoginForm.module.css';
-
-interface LoginrFormI {
-  email: string,
-  password: string
-}
+import { LoginFormT } from 'types/auth/LoginForm.types';
+import { loginUser } from 'eventapp/services/auth/auth.service';
 
 const initialData = {
   email: '',
@@ -26,7 +23,7 @@ const initialData = {
 export const LoginForm: FC = () => {
   const router = useRouter();
 
-  const { control, handleSubmit } = useForm<LoginrFormI>();
+  const { control, handleSubmit } = useForm<LoginFormT>();
 
   const [emailError, setEmailError] = useState<boolean>(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState<string | undefined>(undefined);
@@ -41,7 +38,7 @@ export const LoginForm: FC = () => {
     setCredentialsError(false);
   };
 
-  const onSubmit: SubmitHandler<LoginrFormI> = async (formData) => {
+  const onSubmit: SubmitHandler<LoginFormT> = async (formData) => {
     const emailValidation = validateEmail(formData.email);
     const passwordValidation = validatePasswordLength(formData.password);
 
@@ -62,20 +59,19 @@ export const LoginForm: FC = () => {
       return;
     }
 
-    // fixMe: agregar logIn service
-    // const response = await loginUser(formData);
+    const response = await loginUser(formData);
 
-    // try{
-    //   if(!response.error){
-    //     router.push('/');
-    //   } else{
-    //     setCredentialsError(true);
-    //     setCredentialsErrorMessage(`${response.error}: ${response.message}`);
-    //   }
-    // } catch(error: any){
-    //   setCredentialsError(true);
-    //   setCredentialsErrorMessage(`${response.error}: ${response.message}`);
-    // }
+    try{
+      if(!response.error){
+        router.push('/');
+      } else{
+        setCredentialsError(true);
+        setCredentialsErrorMessage(`${response.error}: ${response.message}`);
+      }
+    } catch(error: any){
+      setCredentialsError(true);
+      setCredentialsErrorMessage(`${response.error}: ${response.message}`);
+    }
   };
 
   return(
