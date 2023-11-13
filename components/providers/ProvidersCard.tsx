@@ -25,7 +25,7 @@ export const ProvidersCard:FC<ProvidersCardI> = ({ provider }) => {
         element: {
           customVariant: 'button-outline',
           customColor: 'primary',
-          href: `/provider/${provider.id}`
+          href: `/providers/${provider.id}`
         },
         text: 'Ver proveedor'
       }}
