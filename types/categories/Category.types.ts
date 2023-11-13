@@ -14,7 +14,7 @@ export type CategoriesT = 'photography'
 
 export type CategoryT = {
   id: number,
-  type: CategoriesT,
+  name: CategoriesT,
   description?: string,
   defaultImage?: string,
 }

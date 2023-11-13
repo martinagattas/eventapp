@@ -1,8 +1,5 @@
-import Grid from '@mui/material/Grid';
-import { CustomTitle } from 'eventapp/components/layout/CustomTitle';
+import { CategoriesList } from 'eventapp/components/categories/CategoriesList';
 import { Layout } from 'eventapp/components/layout/Layout';
-import { Section } from 'eventapp/components/layout/Section';
-import { SliderCard } from 'eventapp/components/slider/SliderCard';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { CategoryT } from 'types/categories/Category.types';
@@ -10,7 +7,7 @@ import { CategoryT } from 'types/categories/Category.types';
 // fixMe: traer listado de categorías de services
 const categories: CategoryT[] = [{
   id: 1,
-  type: 'food',
+  name: 'food',
   description: 'Congela momentos de la mano de los mejores del mercado',
   defaultImage: '/categories/food.png'
 }];
@@ -34,32 +31,7 @@ const Categories: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout variant='navigation'>
-        <Section variant='contained'>
-          <CustomTitle color='primary' htmlTag='h1' text='Categorías'/>
-          <Grid container spacing={2}>
-            {categories.map((category) => (
-              <Grid key={category.id} item xs={12} sm={6} md={4}>
-                <SliderCard
-                  title={`${category.type}`}
-                  cardImg={{
-                    imgSrc: category.defaultImage || '',
-                    imgAlt: category.type
-                  }}
-                  description={category.description}
-                  favButtons={false}
-                  link={{
-                    element: {
-                      customVariant: 'button-outline',
-                      customColor: 'primary',
-                      href: `/categories/${category.type}`
-                    },
-                    text: 'Buscar proveedores'
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Section>
+        <CategoriesList listVariant='grid' title={{text: 'Categorías'}}/>
       </Layout>
     </>
   )

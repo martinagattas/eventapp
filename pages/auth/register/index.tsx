@@ -21,7 +21,7 @@ const Register: NextPage = () => {
         ></meta>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Layout variant='general'>
+      <Layout variant='navigation'>
         <RegisterForm/>
       </Layout>
     </>

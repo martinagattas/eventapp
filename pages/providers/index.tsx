@@ -1,8 +1,5 @@
-import Grid from '@mui/material/Grid';
-import { CustomTitle } from 'eventapp/components/layout/CustomTitle';
 import { Layout } from 'eventapp/components/layout/Layout';
-import { Section } from 'eventapp/components/layout/Section';
-import { SliderCard } from 'eventapp/components/slider/SliderCard';
+import { ProvidersList } from 'eventapp/components/providers/ProvidersList';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { UserProviderI } from 'types/users/User.types';
@@ -11,7 +8,7 @@ import { UserProviderI } from 'types/users/User.types';
 const providers: UserProviderI[] = [{
   id: 1,
   type: 'provider',
-  avatar: '/user/avatar.png',
+  avatar: '/users/avatar.png',
   firstName: 'María',
   lastName: 'Pérez',
   email: 'maria@perez.com',
@@ -42,37 +39,7 @@ const Categories: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout variant='navigation'>
-        <Section variant='contained'>
-          <CustomTitle color='primary' htmlTag='h1' text='Proveedores'/>
-          <Grid container spacing={2}>
-            {providers.map((provider) => (
-              <Grid key={provider.id} item xs={12} sm={6} md={4}>
-                <SliderCard
-                  avatar={{
-                    ariaLabel: `${provider.firstName} ${provider.lastName}`,
-                    imgSrc: provider.avatar || '/user/avatar.png',
-                    imgAlt: `${provider.firstName} ${provider.lastName}`
-                  }}
-                  title={`${provider.firstName} ${provider.lastName}`}
-                  cardImg={{
-                    imgSrc: provider.defaultImage,
-                    imgAlt: provider.type
-                  }}
-                  description={provider.shortDescription}
-                  extraDescription={`Categorías: ${provider.categories}`}
-                  link={{
-                    element: {
-                      customVariant: 'button-outline',
-                      customColor: 'primary',
-                      href: `/provider/${provider.id}`
-                    },
-                    text: 'Ver proveedor'
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Section>
+        <ProvidersList listVariant='grid' title={{text: 'Proveedores'}}/>
       </Layout>
     </>
   )

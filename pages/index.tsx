@@ -1,6 +1,6 @@
-import { CategoriesList } from 'eventapp/components/home/CategoriesList';
+import { CategoriesList } from 'eventapp/components/categories/CategoriesList';
 import { Hero } from 'eventapp/components/home/Hero';
-import { ProvidersList } from 'eventapp/components/home/ProvidersList';
+import { ProvidersList } from 'eventapp/components/providers/ProvidersList';
 import { Layout } from 'eventapp/components/layout/Layout';
 import { NextPage } from 'next';
 import Head from 'next/head';
@@ -25,8 +25,8 @@ const Home: NextPage = () => {
       </Head>
       <Layout variant='navigation'>
         <Hero/>
-        <ProvidersList/>
-        <CategoriesList/>
+        <ProvidersList listVariant='slider' title={{text: 'Proveedores'}}/>
+        <CategoriesList listVariant='slider' title={{text: 'Categorías'}}/>
       </Layout>
     </>
   )
