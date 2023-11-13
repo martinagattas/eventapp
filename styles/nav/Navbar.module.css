@@ -10,8 +10,13 @@
 }
 
 .navbar-logo{
-  width: 10rem;
-  height: auto;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  letter-spacing: .1rem;
 }
 
 .button-group{

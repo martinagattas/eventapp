@@ -10,6 +10,7 @@ import { NavbarMenu } from './NavbarMenu';
 import s from '../../styles/nav/Navbar.module.css';
 import { UserT } from 'types/users/User.types';
 import { NavbarMenuAuth } from './NavbarMenuAuth';
+import { useRouter } from 'next/router';
 
 interface NavbarProps {
   auth: boolean,
@@ -17,6 +18,8 @@ interface NavbarProps {
 }
 
 export const Navbar:FC<NavbarProps> = ({ auth, user }) => {
+  const router = useRouter();
+
   const [logged, setLogged] = useState(auth);
   const [userId, setUserId] = useState(user?.id);
   const [userType, setUserType] = useState(user?.type);
@@ -59,13 +62,17 @@ export const Navbar:FC<NavbarProps> = ({ auth, user }) => {
     // setUserType('')
     // setUserEmail('')
     setLogged(false);
+    router.push('/');
   }
 
   return (
     <AppBar className={s.container}>
       <Toolbar className={s['sub-container']}>
         <Box display={"flex"} alignItems={"center"} gap={4}>
-          <CustomLink href="/" underline="none"><Image src="/logo_positive.png" alt="Eventify" width={387} height={90} className={s['navbar-logo']}/></CustomLink>
+          <CustomLink href="/" underline="none" className={s['navbar-logo']}>
+            <Image src="/iso_positive.png" alt="Eventify" width={30} height={30}/>
+            EVENTIFY
+          </CustomLink>
           <Box className={s['button-group']}>
             <CustomLink href="/categories" underline="none" customVariant="link" customColor="primary"><Redeem/> Categorías</CustomLink>
             <CustomLink href="/providers" underline="none" customVariant="link" customColor="primary"><SupervisorAccount/> Proveedores</CustomLink>
