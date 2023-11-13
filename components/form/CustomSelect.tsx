@@ -4,6 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import s from '../../styles/form/CustomSelect.module.css';
 
 export const CustomSelect = ({
   name,
@@ -20,6 +21,7 @@ export const CustomSelect = ({
   children,
   className
 }: CustomSelectT) => {
+  const inputSelect = `${s.select} ${className}`
   return(
     <Controller
       name={name}
@@ -27,7 +29,7 @@ export const CustomSelect = ({
       defaultValue={defaultValue}
       render={({ field }) => (
         <FormControl fullWidth>
-          <InputLabel>{label}</InputLabel>
+          <InputLabel className={s.label}>{label}</InputLabel>
           <Select
             variant="outlined"
             fullWidth
@@ -39,7 +41,7 @@ export const CustomSelect = ({
             {...selectProps}
             value={value}
             onChange={onChange}
-            className={className}
+            className={inputSelect}
           >
             {children}
           </Select>

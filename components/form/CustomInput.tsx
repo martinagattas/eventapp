@@ -1,6 +1,7 @@
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import { CustomInputT } from 'types/form/CustomInput.types';
+import s from '../../styles/form/CustomInput.module.css';
 
 export const CustomInput = ({
   name,
@@ -15,6 +16,7 @@ export const CustomInput = ({
   textFieldProps,
   className
 }: CustomInputT) => {
+  const inputClass = `${s.input} ${className}`
   return(
     <Controller
       name={name}
@@ -32,7 +34,7 @@ export const CustomInput = ({
           error={error}
           helperText={helperText}
           {...textFieldProps}
-          className={className}
+          className={inputClass}
         />
       )}
     />
