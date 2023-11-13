@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { CustomSlider } from '../slider/Slider';
 import { SliderCard } from '../slider/SliderCard';
 import { UserProviderI } from 'types/users/User.types';
+import { CustomTitle } from '../layout/CustomTitle';
 // import s from '../../styles/home/ProvidersList.module.css';
 
 // fixMe: traer listado de proveedores de services
@@ -23,7 +24,7 @@ const providers: UserProviderI[] = [{
 export const ProvidersList:FC = () => {
   return (
     <>
-      <h2>Proveedores</h2>
+      <CustomTitle color="primary" htmlTag="h2" text="Listado de proveedores"/>
       <CustomSlider totalCards={providers.length}>
         {providers.map((provider) => (
           <SliderCard
