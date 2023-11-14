@@ -1,20 +1,32 @@
-import React, { FC, PropsWithChildren } from "react";
-import { Container, Stack } from "@mui/material";
-import { Navbar } from "./Navbar";
-import { Footer } from "./Footer";
+import React, { FC, PropsWithChildren } from 'react';
+import Stack from '@mui/material/Stack';
+import { Navbar } from '../nav/Navbar';
+import s from '../../styles/layout/Layout.module.css';
+import { UserT } from 'types/users/User.types';
 
-interface Props extends PropsWithChildren{
-    variant: 'general' | 'auth'
+interface LayoutI extends PropsWithChildren {
+  className?: string,
+  variant: 'navigation' | 'full'
 }
 
-export const Layout: FC<Props> = ({ children, variant }: Props) => {
-    return (
-        <Stack>
-            {variant === 'general' && <Navbar />}
-            <Container className={variant === 'general' ? 'generalContainer' : 'authContainer'}>
-                {children}
-            </Container>
-            {/* {variant === 'general' && <Footer />} */}
-        </Stack>
-    );
+// fixMe: ver de dónde saco estas credenciales para saber quién es el user si está loggeado (auth = true)
+const auth = false;
+const fakeUser: UserT = {
+  id: 1,
+  type: 'client',
+  firstName: 'María',
+  lastName: 'Pérez',
+  email: 'maria@perez.com'
+}
+
+export const Layout: FC<LayoutI> = ({ className, variant, children }) => {
+  const containerClass = `${s.container} ${s[variant]} ${className}`;
+
+  return (
+    <Stack className={containerClass}>
+      {variant === 'navigation' && <Navbar auth={auth} user={fakeUser} />}
+      {children}
+      {/* {variant === 'navigation' && <Footer />} */}
+    </Stack>
+  )
 }
