@@ -1,18 +1,26 @@
+import { useEffect, useState } from 'react';
 import { CategoriesList } from 'eventapp/components/categories/CategoriesList';
 import { Layout } from 'eventapp/components/layout/Layout';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { CategoryT } from 'types/categories/Category.types';
-
-// fixMe: traer listado de categorías de services
-const categories: CategoryT[] = [{
-  id: 1,
-  name: 'food',
-  description: 'Congela momentos de la mano de los mejores del mercado',
-  defaultImage: '/categories/food.png'
-}];
+import { getCategories } from 'eventapp/services/categories/categories.service';
 
 const Categories: NextPage = () => {
+  const [categories, setCategories] = useState<CategoryT[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {        
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error('Error al obtener proveedores:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <Head>
@@ -31,7 +39,7 @@ const Categories: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout variant='navigation'>
-        <CategoriesList listVariant='grid' title={{text: 'Categorías'}}/>
+        <CategoriesList listVariant='grid' title={{text: 'Categorías'}} categories={categories}/>
       </Layout>
     </>
   )

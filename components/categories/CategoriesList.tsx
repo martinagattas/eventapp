@@ -7,20 +7,13 @@ import { CategoryT } from 'types/categories/Category.types';
 import Grid from '@mui/material/Grid';
 import { CategoriesCard } from './CategoriesCard';
 
-// fixMe: traer listado de categorías de services
-const categories: CategoryT[] = [{
-  id: 1,
-  name: 'food',
-  description: 'Congela momentos de la mano de los mejores del mercado',
-  defaultImage: '/categories/food.png'
-}];
-
 interface CategoriesListI {
   title?: CustomTitleI,
-  listVariant?: 'slider' | 'grid'
+  listVariant?: 'slider' | 'grid',
+  categories: CategoryT[]
 }
 
-export const CategoriesList:FC<CategoriesListI> = ({ title, listVariant = 'slider' }) => {
+export const CategoriesList:FC<CategoriesListI> = ({ title, listVariant = 'slider', categories }) => {
   const { color = 'primary', htmlTag = 'h2', text } = {...title};
 
   const xs = useMediaQuery('(max-width:600px)');

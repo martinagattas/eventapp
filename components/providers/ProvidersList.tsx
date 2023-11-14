@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { CustomSlider } from '../slider/Slider';
 import { UserProviderI } from 'types/users/User.types';
 import { CustomTitle, CustomTitleI } from '../layout/CustomTitle';
@@ -6,29 +6,15 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Section } from '../layout/Section';
 import { ProvidersCard } from './ProvidersCard';
 import Grid from '@mui/material/Grid';
-import { getProviders } from 'eventapp/services/providers/providers.service';
 
 interface ProvidersListI {
   title?: CustomTitleI,
-  listVariant?: 'slider' | 'grid'
+  listVariant?: 'slider' | 'grid',
+  providers: UserProviderI[]
 }
 
-export const ProvidersList:FC<ProvidersListI> = ({ title, listVariant = 'slider' }) => {
+export const ProvidersList:FC<ProvidersListI> = ({ title, listVariant = 'slider', providers }) => {
   const { color = 'primary', htmlTag = 'h2', text } = {...title};
-
-  const [providers, setProviders] = useState<UserProviderI[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {        
-        const providersData = await getProviders();
-        setProviders(providersData);
-      } catch (error) {
-        console.error('Error al obtener proveedores:', error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const xs = useMediaQuery('(max-width:600px)');
   const sm = useMediaQuery('(max-width:960px)');
